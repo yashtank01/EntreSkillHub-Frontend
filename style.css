@@ -1,0 +1,172 @@
+/* 1. Base Setup & Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; /* Makes sure padding doesn't mess up widths */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #f3f4f6; /* A soft, professional light gray */
+    color: #333;
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+/* 2. Navigation Bar */
+.navbar {
+    background-color: #1e40af; /* Deep trust-building blue */
+    color: white;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    margin-left: 1.5rem;
+    font-weight: 500;
+}
+
+.nav-links a:hover {
+    text-decoration: underline; /* Visual feedback when hovering */
+}
+
+/* 3. Forms (Registration & Profiling) */
+form {
+    background: white;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    max-width: 500px;
+    margin-top: 1rem;
+}
+
+label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+}
+
+input[type="text"], 
+input[type="email"], 
+input[type="password"], 
+select {
+    width: 100%;
+    padding: 0.75rem;
+    margin-bottom: 1.5rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+input[type="checkbox"] {
+    margin-right: 0.5rem;
+    transform: scale(1.2); /* Makes the checkbox slightly larger and easier to click */
+}
+
+/* 4. Dashboard Sections & Cards */
+.dashboard-section {
+    margin-bottom: 3rem;
+}
+
+.dashboard-section h2 {
+    color: #1f2937;
+    border-bottom: 2px solid #e5e7eb; /* Adds a nice divider line under headers */
+    padding-bottom: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.card-grid {
+    display: flex;
+    flex-wrap: wrap; /* Pushes cards to the next row if the screen is too small */
+    gap: 1.5rem;
+}
+
+.idea-card, .resource-card, .progress-card {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    flex: 1 1 300px; /* Tells the cards to grow, but shrink no smaller than 300px */
+    border: 1px solid #e5e7eb;
+}
+
+/* 5. Buttons */
+button {
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    width: 100%;
+    transition: 0.3s; /* Makes color changes smooth */
+}
+
+button[type="submit"], .action-btn {
+    background-color: #1e40af;
+    color: white;
+}
+
+button[type="submit"]:hover, .action-btn:hover {
+    background-color: #1e3a8a; /* Slightly darker blue on hover */
+}
+
+.card-buttons {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 1rem;
+}
+
+.save-btn {
+    background-color: #e5e7eb;
+    color: #374151;
+}
+
+/* This is the class Javascript will add to turn the button green */
+.save-btn.saved {
+    background-color: #10b981; 
+    color: white;
+}
+
+/* 6. Progress Bar */
+.progress-bar-background {
+    background-color: #e5e7eb;
+    border-radius: 999px;
+    height: 1.5rem;
+    width: 100%;
+    margin: 1rem 0;
+    overflow: hidden;
+}
+
+.progress-bar-fill {
+    background-color: #10b981; /* Green fill */
+    height: 100%;
+    color: white;
+    text-align: center;
+    font-size: 0.875rem;
+    font-weight: bold;
+}
+/* Fix to put checkboxes and labels on the same line */
+.checkbox-wrapper {
+    display: flex;
+    align-items: center; /* Vertically centers the box with the text */
+    margin-bottom: 1rem;
+}
+
+.checkbox-wrapper label {
+    display: inline; /* This forces the label to share the line */
+    margin-bottom: 0; /* Removes extra spacing */
+    margin-left: 0.5rem; /* Adds a tiny gap between the box and the text */
+    font-weight: normal; /* Makes it look slightly cleaner next to a box */
+}
+
+.checkbox-wrapper input[type="checkbox"] {
+    margin-bottom: 0; /* Prevents the box from floating weirdly */
+}

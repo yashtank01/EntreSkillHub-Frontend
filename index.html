@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - EntreSkill Hub</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <nav class="navbar">
+        <h1>EntreSkill Hub</h1>
+        <div class="nav-links">
+            <a href="index.html">Dashboard</a>
+            <a href="mentors.html">Find Mentors</a>
+            <a href="profiling.html">Update Skills</a>
+        </div>
+    </nav>
+
+    <main class="container">
+        
+        <section class="dashboard-section">
+            <h2>Your Learning Progress</h2>
+            <div class="progress-card">
+                <h3>Current Roadmap: Handicraft Online Store</h3>
+                <p>Step 3 of 7: Legal & Registration Steps</p>
+                
+                <div class="progress-bar-background">
+                    <div class="progress-bar-fill" style="width: 45%;">45%</div>
+                </div>
+                
+                <button class="action-btn">Continue Roadmap</button>
+            </div>
+        </section>
+
+        <section class="dashboard-section">
+            <h2>Recommended For You</h2>
+            <p>Based on your selected skills in tailoring and handicrafts.</p>
+            
+            <div class="card-grid">
+                <div class="idea-card">
+                    <h3>Custom Tailoring Boutique</h3>
+                    <p>Start a local business altering and creating custom clothing.</p>
+                    <div class="card-buttons">
+                        <button class="action-btn">View Roadmap</button>
+                        <button class="save-btn" onclick="saveIdea(this)">Bookmark</button>
+                    </div>
+                </div>
+
+                <div class="idea-card">
+                    <h3>Handmade Home Decor</h3>
+                    <p>Create and sell decorative items online and at local markets.</p>
+                    <div class="card-buttons">
+                        <button class="action-btn">View Roadmap</button>
+                        <button class="save-btn" onclick="saveIdea(this)">Bookmark</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="dashboard-section">
+            <h2>Learning Resources</h2>
+            
+            <div class="card-grid">
+                <div class="resource-card">
+                    <h4>🎬 Video: Marketing Basics</h4>
+                    <p>Learn how to promote your new micro-business on social media.</p>
+                    <a href="#" class="resource-link">Watch Video</a>
+                </div>
+
+                <div class="resource-card">
+                    <h4>📋 Checklist: Cost Estimation</h4>
+                    <p>A simple template to calculate your initial startup costs.</p>
+                    <a href="#" class="resource-link">Download Checklist</a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
