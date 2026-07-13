@@ -7,30 +7,56 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
+
+    <div style="position: absolute; top: 20px; right: 20px;">
+        <button id="theme-toggle" class="theme-icon-btn" aria-label="Toggle Theme">
+            <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+            <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+        </button>
+    </div>
+
+    <div id="toast-message" class="toast hidden"></div>
+
+    <div class="auth-container">
         <h2>Join EntreSkill Hub</h2>
         <p>Start your micro-business journey today.</p>
 
-        <form action="profiling.html">
-            <label for="fullname">Full Name:</label>
-            <input type="text" id="fullname" name="fullname" required placeholder="Enter your name">
+        <form id="register-form">
+            <div style="text-align: left;">
+                <label for="reg-name" style="font-weight: bold;">Full Name:</label>
+                <input type="text" id="reg-name" placeholder="Enter your name" required>
+            </div>
+            
+            <div style="text-align: left;">
+                <label for="reg-email" style="font-weight: bold;">Email Address:</label>
+                <input type="email" id="reg-email" placeholder="Enter your email" required>
+            </div>
+            
+            <div style="text-align: left;">
+                <label for="reg-password" style="font-weight: bold;">Password:</label>
+                <div class="password-wrapper">
+                    <input type="password" id="reg-password" placeholder="Create a password" required>
+                    <span class="toggle-password" onclick="togglePassword('reg-password', this)">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#64748b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12c3.5 4 7.5 7 10 7s6.5-3 10-7"/><path d="M12 19v2"/><path d="M17 17.5l1.5 1.5"/><path d="M7 17.5l-1.5 1.5"/></svg>
+                    </span>
+                </div>
+            </div>
 
-            <label for="email">Email Address:</label>
-            <input type="email" id="email" name="email" required placeholder="Enter your email">
+            <div style="text-align: left;">
+                <label for="reg-role" style="font-weight: bold;">I want to:</label>
+                <select id="reg-role" required>
+                    <option value="student">Learn and start a business</option>
+                    <option value="mentor">Become a Mentor</option>
+                </select>
+            </div>
 
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password" required placeholder="Create a password">
-
-            <label for="role">I want to:</label>
-            <select id="role" name="role">
-                <option value="learner">Learn and start a business</option>
-                <option value="mentor">Become a Mentor</option>
-            </select>
-
-            <button type="submit">Create Account</button>
+            <button type="submit" style="margin-top: 20px;">Create Account</button>
         </form>
-        
-        <p>Already have an account? <a href="index.html">Log in here</a></p>
+
+        <p class="toggle-text">Already have an account? <a href="auth.html">Log in here</a></p>
     </div>
+
+   <script src="global.js" defer></script>
+    <script src="auth.js" defer></script>
 </body>
 </html>

@@ -1,172 +1,382 @@
-/* 1. Base Setup & Reset */
+/* ========================================== */
+/* 1. GLOBAL BASE & TYPOGRAPHY                */
+/* ========================================== */
 * {
     margin: 0;
     padding: 0;
-    box-sizing: border-box; /* Makes sure padding doesn't mess up widths */
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    box-sizing: border-box; /* Keeps padding inside the width */
 }
 
-body {
-    background-color: #f3f4f6; /* A soft, professional light gray */
+/* Default Body (Centers the Auth Page) */
+body { 
+    font-family: Arial, 'Segoe UI', sans-serif; 
+    background-color: #f4f7f6; 
     color: #333;
     line-height: 1.6;
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    min-height: 100vh; 
 }
 
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 2rem;
+/* Override Flexbox for all other dashboard/internal pages */
+body.dashboard-page, 
+body.mentor-page, 
+body.admin-page, 
+body.progress-page, 
+body.roadmap-page { 
+    display: block !important; 
+    padding: 20px; 
 }
 
-/* 2. Navigation Bar */
-.navbar {
-    background-color: #1e40af; /* Deep trust-building blue */
-    color: white;
-    padding: 1rem 2rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
+h2 { margin-top: 0; color: #1e293b; }
+p { color: #64748b; font-size: 0.9em; margin-bottom: 20px; }
+.hidden { display: none; }
 
-.nav-links a {
-    color: white;
-    text-decoration: none;
-    margin-left: 1.5rem;
-    font-weight: 500;
-}
 
-.nav-links a:hover {
-    text-decoration: underline; /* Visual feedback when hovering */
-}
+/* ========================================== */
+/* 2. GLOBAL FORMS, INPUTS & BUTTONS          */
+/* ========================================== */
 
-/* 3. Forms (Registration & Profiling) */
-form {
-    background: white;
-    padding: 2rem;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-    max-width: 500px;
-    margin-top: 1rem;
-}
-
-label {
-    display: block;
-    margin-bottom: 0.5rem;
-    font-weight: 600;
-}
-
+/* Standardized Text Inputs */
 input[type="text"], 
 input[type="email"], 
 input[type="password"], 
 select {
     width: 100%;
-    padding: 0.75rem;
-    margin-bottom: 1.5rem;
+    padding: 12px;
+    margin: 10px 0;
     border: 1px solid #ccc;
-    border-radius: 4px;
+    border-radius: 6px;
+    font-size: 1em;
 }
 
-input[type="checkbox"] {
-    margin-right: 0.5rem;
-    transform: scale(1.2); /* Makes the checkbox slightly larger and easier to click */
-}
-
-/* 4. Dashboard Sections & Cards */
-.dashboard-section {
-    margin-bottom: 3rem;
-}
-
-.dashboard-section h2 {
-    color: #1f2937;
-    border-bottom: 2px solid #e5e7eb; /* Adds a nice divider line under headers */
-    padding-bottom: 0.5rem;
-    margin-bottom: 1rem;
-}
-
-.card-grid {
-    display: flex;
-    flex-wrap: wrap; /* Pushes cards to the next row if the screen is too small */
-    gap: 1.5rem;
-}
-
-.idea-card, .resource-card, .progress-card {
-    background: white;
-    padding: 1.5rem;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-    flex: 1 1 300px; /* Tells the cards to grow, but shrink no smaller than 300px */
-    border: 1px solid #e5e7eb;
-}
-
-/* 5. Buttons */
-button {
-    padding: 0.75rem 1.5rem;
-    border: none;
-    border-radius: 4px;
+/* Checkbox and Radio Adjustments */
+input[type="checkbox"], 
+input[type="radio"] {
+    width: auto; 
+    margin: 0 10px 0 0; 
     cursor: pointer;
+    transform: scale(1.2);
+}
+
+/* Standardized Buttons */
+button { 
+    width: 100%; 
+    padding: 12px 15px; 
+    border: none; 
+    border-radius: 6px; 
+    cursor: pointer; 
+    font-weight: bold; 
+    background-color: #2563eb; 
+    color: white; 
+    font-size: 1em;
+    transition: 0.3s ease; 
+    margin-top: 10px; 
+}
+
+button:hover { 
+    background-color: #1d4ed8; 
+}
+
+/* Used when an idea is successfully saved */
+button.saved, .btn-accept { background-color: #10b981 !important; color: white; }
+button.saved:hover, .btn-accept:hover { background-color: #059669 !important; }
+
+.btn-decline, .btn-reject { background: #ef4444 !important; color: white; }
+.btn-decline:hover, .btn-reject:hover { background: #dc2626 !important; }
+
+/* Custom Pop-up Notification (Toast) */
+.toast {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 15px 25px;
+    border-radius: 8px;
+    color: white;
     font-weight: bold;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    z-index: 1000;
+    transition: opacity 0.4s ease, top 0.4s ease;
+    text-align: center;
+    min-width: 250px;
+}
+.toast.hidden { opacity: 0; top: -50px; pointer-events: none; }
+.toast.success { background-color: #10b981; } 
+.toast.error { background-color: #ef4444; }   
+
+
+/* ========================================== */
+/* 3. AUTHENTICATION PAGE (auth.html)         */
+/* ========================================== */
+.auth-container { 
+    background: white; 
+    padding: 40px 30px; 
+    border-radius: 10px; 
+    box-shadow: 0 10px 15px rgba(0,0,0,0.1); 
+    width: 100%; 
+    max-width: 550px; 
+    text-align: center; 
+}
+
+.password-wrapper { position: relative; width: 100%; margin: 10px 0; }
+.password-wrapper input { margin: 0; padding-right: 40px; }
+.toggle-password {
+    position: absolute; right: 12px; top: 50%; transform: translateY(-50%);
+    cursor: pointer; display: flex; align-items: center; transition: 0.3s;
+}
+.toggle-password:hover { opacity: 0.7; }
+
+.toggle-text { margin-top: 20px; font-size: 0.9em; color: #555; }
+.toggle-text a { color: #2563eb; cursor: pointer; text-decoration: none; font-weight: bold; }
+.toggle-text a:hover { text-decoration: underline; }
+
+.divider { margin: 20px 0; color: #aaa; font-size: 0.9em; position: relative; }
+.divider::before, .divider::after { content: ""; position: absolute; top: 50%; width: 40%; height: 1px; background: #ddd; }
+.divider::before { left: 0; }
+.divider::after { right: 0; }
+
+.google-btn { background-color: white; color: #333; border: 1px solid #ccc; display: flex; justify-content: center; align-items: center; gap: 10px; }
+.google-btn:hover { background-color: #f8fafc; }
+
+
+/* ========================================== */
+/* 4. DASHBOARD & NAVIGATION                  */
+/* ========================================== */
+.nav { margin-bottom: 30px; }
+.nav a { margin-right: 15px; text-decoration: none; color: #2563eb; font-weight: bold; }
+
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+.idea-card { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+.idea-card h3 { color: #1e293b; margin-top: 0; }
+.video-container { margin: 15px 0; }
+iframe { width: 100%; height: 200px; border-radius: 6px; border: none; }
+
+
+/* ========================================== */
+/* 5. MENTOR PORTAL                           */
+/* ========================================== */
+.mentor-nav { background: #1e293b; padding: 20px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); margin-bottom: 20px; color: white; display: flex; justify-content: space-between; align-items: center;}
+.mentor-nav h2 { margin: 0; color: white; }
+.mentor-nav .links a { margin-left: 20px; text-decoration: none; color: #94a3b8; font-weight: bold; transition: 0.2s; }
+.mentor-nav .links a:hover { color: white; }
+
+.mentor-container { display: flex; gap: 30px; max-width: 1000px; margin: 40px auto; padding: 0 20px; flex-wrap: wrap; }
+.panel { flex: 1; min-width: 300px; background: white; padding: 25px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+.panel h3 { border-bottom: 2px solid #10b981; padding-bottom: 10px; color: #1e293b; margin-top: 0; }
+
+.request-card { background: #f8fafc; padding: 15px; margin-bottom: 15px; border-left: 4px solid #f59e0b; border-radius: 4px; transition: 0.3s; }
+.request-card h4 { margin: 0 0 5px 0; color: #334155; }
+.request-card p { margin: 0 0 5px 0; font-size: 0.9em; color: #64748b; }
+.btn-group { display: flex; gap: 10px; margin-top: 15px; }
+
+
+/* ========================================== */
+/* 6. ADMIN DASHBOARD                         */
+/* ========================================== */
+body.admin-page { background-color: #f1f5f9; }
+.admin-nav { background: #7463c1; padding: 20px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); margin-bottom: 20px; color: white; display: flex; justify-content: space-between; align-items: center;}
+.admin-nav h2 { margin: 0; color: #f8fafc; font-size: 1.5em; }
+.admin-nav .links a { margin-left: 20px; text-decoration: none; color: #94a3b8; font-weight: bold; transition: 0.2s; }
+.admin-nav .links a:hover { color: white; }
+
+.admin-container { max-width: 1100px; margin: 0 auto; padding: 20px; }
+.stats-grid { display: flex; gap: 20px; margin-bottom: 30px; flex-wrap: wrap; }
+.stat-card { flex: 1; min-width: 200px; background: white; padding: 20px; border-radius: 8px; border-top: 4px solid #3b82f6; box-shadow: 0 4px 6px rgba(0,0,0,0.05); text-align: center; }
+.stat-card.blue { border-top-color: #3b82f6; }
+.stat-card.green { border-top-color: #10b981; }
+.stat-card.yellow { border-top-color: #f59e0b; }
+.stat-card h3 { margin: 0; color: #64748b; font-size: 1em; text-transform: uppercase; }
+.stat-card .number { font-size: 2.5em; font-weight: bold; color: #0f172a; margin: 10px 0 0 0; }
+
+.admin-panels { display: flex; gap: 30px; flex-wrap: wrap; }
+.admin-list-item { display: flex; justify-content: space-between; align-items: center; padding: 15px 0; border-bottom: 1px solid #f1f5f9; }
+.admin-list-item:last-child { border-bottom: none; }
+.user-info h4 { margin: 0 0 5px 0; color: #334155; }
+.user-info p { margin: 0; font-size: 0.85em; color: #64748b; }
+
+
+/* ========================================== */
+/* 7. PROGRESS & ROADMAP PAGES                */
+/* ========================================== */
+.progress-container { display: flex; flex-wrap: wrap; gap: 30px; max-width: 1000px; margin: 40px auto; padding: 0 20px; }
+.progress-column { flex: 1; min-width: 300px; background: white; padding: 20px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+.progress-column h3 { border-bottom: 2px solid #2563eb; padding-bottom: 10px; color: #1e293b; }
+.item-card { background: #f8fafc; padding: 15px; margin-bottom: 15px; border-left: 4px solid #10b981; border-radius: 4px; }
+.item-card h4 { margin: 0 0 5px 0; color: #334155; }
+.item-card p { margin: 0; font-size: 0.85em; color: #64748b; }
+
+.roadmap-container { max-width: 800px; margin: 40px auto; background: white; padding: 30px; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+#roadmap-title { color: #1e293b; margin-top: 0; }
+#roadmap-intro { color: #64748b; font-size: 1.1em; margin-bottom: 30px; border-bottom: 1px solid #e2e8f0; padding-bottom: 20px; }
+.step-card { border-left: 4px solid #2563eb; background: #f8fafc; padding: 15px 20px; margin-bottom: 20px; border-radius: 4px; }
+.step-card h3 { margin-top: 0; color: #1e293b; display: flex; align-items: center; gap: 10px; font-size: 1.2em; }
+.step-number { background: #2563eb; color: white; border-radius: 50%; min-width: 30px; height: 30px; display: flex; justify-content: center; align-items: center; font-size: 0.9em; }
+.step-card p { margin-bottom: 0; line-height: 1.5; color: #334155; }
+
+
+/* ========================================== */
+/* 8. GLOBAL THEME MANAGER (DARK MODE)        */
+/* ========================================== */
+
+/* The Sun/Moon Toggle Button */
+.theme-icon-btn { background: transparent; border: none; cursor: pointer; color: #1e293b; display: flex; align-items: center; justify-content: center; padding: 8px; border-radius: 50%; width: auto; margin: 0; }
+.theme-icon-btn:hover { background-color: rgba(0, 0, 0, 0.1); }
+.sun-icon { display: none; }
+.moon-icon { display: block; }
+
+/* The Dark Mode Overrides */
+body.dark-mode { background-color: #0f172a !important; color: #f8fafc !important; }
+body.dark-mode h1, body.dark-mode h2, body.dark-mode h3, body.dark-mode p, body.dark-mode span { color: #f8fafc !important; }
+
+/* Making all the white cards/boxes turn dark */
+body.dark-mode .idea-card,
+body.dark-mode .auth-container,
+body.dark-mode .panel,
+body.dark-mode .stat-card,
+body.dark-mode .progress-column, 
+body.dark-mode .roadmap-container {
+    background-color: #1e293b !important;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5) !important;
+    border: 1px solid #334155 !important;
+}
+
+/* Secondary dark backgrounds for inner elements */
+body.dark-mode .item-card, 
+body.dark-mode .step-card,
+body.dark-mode .request-card { 
+    background-color: #0f172a !important; 
+    color: #f8fafc; 
+}
+
+/* Fix text and links in dark mode */
+body.dark-mode .nav a { color: #60a5fa !important; }
+body.dark-mode .item-card h4, body.dark-mode .step-card h3 { color: #f8fafc !important; }
+body.dark-mode .progress-column h3 { border-bottom-color: #3b82f6; }
+body.dark-mode #roadmap-intro { border-bottom-color: #334155; }
+
+/* Switch the Icon in dark mode */
+body.dark-mode .theme-icon-btn { color: #f8fafc; }
+body.dark-mode .theme-icon-btn:hover { background-color: rgba(255, 255, 255, 0.1); }
+body.dark-mode .sun-icon { display: block; }
+body.dark-mode .moon-icon { display: none; }
+
+/* Fix for the Google Button in Dark Mode (Prevents invisible text) */
+body.dark-mode .google-btn {
+    background-color: #334155 !important;
+    color: #f8fafc !important;
+    border-color: #475569 !important;
+}
+
+body.dark-mode .google-btn:hover {
+    background-color: #475569 !important;
+}
+
+/* (Optional) If you are using the official Google iframe snippet in auth.html */
+body.dark-mode .g_id_signin iframe {
+    color-scheme: light; /* Forces the iframe to keep its original text color so it doesn't vanish */
+}
+/* ========================================== */
+/* 9. UNIVERSAL UTILITY CLASSES               */
+/* ========================================== */
+
+/* Universal Navigation Layout */
+.universal-nav { 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    background: transparent; 
+    padding: 20px 0; 
+    margin-bottom: 20px; 
+    border-bottom: 1px solid #e2e8f0; 
+}
+.universal-nav h2 { margin: 0; font-size: 1.5em; }
+.nav-right-controls { display: flex; align-items: center; gap: 20px; }
+.nav-link { text-decoration: none; font-weight: bold; margin-right: 15px; color: #2563eb; }
+.nav-link.active { color: #10b981; }
+
+/* Main Centered Content Container */
+.page-container { 
+    max-width: 1000px; 
+    margin: 0 auto; 
+    padding: 0 20px; 
+}
+.page-title { margin-bottom: 10px; }
+
+/* Floating Dark Mode Button (For Login/Register) */
+.floating-toggle-container { 
+    position: absolute; 
+    top: 20px; 
+    right: 20px; 
+}
+.nav-toggle-btn { margin: 0; padding: 5px; }
+
+/* Clean Form Groups */
+.input-group { text-align: left; margin-bottom: 5px; }
+.input-group label { font-weight: bold; }
+
+/* Mentor Card Colored Borders */
+.border-blue { border-top: 4px solid #3b82f6; }
+.border-green { border-top: 4px solid #10b981; }
+.border-yellow { border-top: 4px solid #f59e0b; }
+
+/* Progress Bar Styles */
+.progress-track {
+    background: #e2e8f0;
+    border-radius: 8px;
+    height: 10px;
     width: 100%;
-    transition: 0.3s; /* Makes color changes smooth */
-}
-
-button[type="submit"], .action-btn {
-    background-color: #1e40af;
-    color: white;
-}
-
-button[type="submit"]:hover, .action-btn:hover {
-    background-color: #1e3a8a; /* Slightly darker blue on hover */
-}
-
-.card-buttons {
-    display: flex;
-    gap: 0.5rem;
-    margin-top: 1rem;
-}
-
-.save-btn {
-    background-color: #e5e7eb;
-    color: #374151;
-}
-
-/* This is the class Javascript will add to turn the button green */
-.save-btn.saved {
-    background-color: #10b981; 
-    color: white;
-}
-
-/* 6. Progress Bar */
-.progress-bar-background {
-    background-color: #e5e7eb;
-    border-radius: 999px;
-    height: 1.5rem;
-    width: 100%;
-    margin: 1rem 0;
+    margin-bottom: 10px;
     overflow: hidden;
 }
-
-.progress-bar-fill {
-    background-color: #10b981; /* Green fill */
-    height: 100%;
-    color: white;
-    text-align: center;
-    font-size: 0.875rem;
+.progress-fill {
+    background: #2563eb;
+    height: 10px;
+    border-radius: 8px;
+    width: 45%; /* This can be updated dynamically via JavaScript later */
+}
+.progress-text {
+    text-align: right;
     font-weight: bold;
+    margin-bottom: 15px;
+    color: #334155;
 }
-/* Fix to put checkboxes and labels on the same line */
-.checkbox-wrapper {
+
+/* Specific Button Styles */
+.btn-full {
+    width: 100%;
+    margin-bottom: 40px;
+    padding: 12px;
+    font-size: 1.1em;
+}
+.btn-outline {
+    margin-bottom: 10px;
+    background: #f8fafc;
+    color: #2563eb;
+    border: 1px solid #2563eb;
+}
+.btn-outline:hover {
+    background: #e2e8f0;
+}
+
+/* Layout & Spacing Classes */
+.section-margin { margin-bottom: 40px; }
+.text-margin { margin-bottom: 20px; }
+.title-margin { margin-bottom: 10px; }
+.resource-grid {
     display: flex;
-    align-items: center; /* Vertically centers the box with the text */
-    margin-bottom: 1rem;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-bottom: 40px;
+}
+.resource-card {
+    flex: 1;
+    min-width: 250px;
 }
 
-.checkbox-wrapper label {
-    display: inline; /* This forces the label to share the line */
-    margin-bottom: 0; /* Removes extra spacing */
-    margin-left: 0.5rem; /* Adds a tiny gap between the box and the text */
-    font-weight: normal; /* Makes it look slightly cleaner next to a box */
-}
-
-.checkbox-wrapper input[type="checkbox"] {
-    margin-bottom: 0; /* Prevents the box from floating weirdly */
-}
+/* Dark Mode Overrides for the new elements */
+body.dark-mode .progress-track { background: #334155; }
+body.dark-mode .progress-text { color: #f8fafc; }
+body.dark-mode .btn-outline { background: transparent; color: #60a5fa; border-color: #60a5fa; }
+body.dark-mode .btn-outline:hover { background: rgba(96, 165, 250, 0.1); }

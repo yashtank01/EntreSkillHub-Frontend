@@ -7,36 +7,50 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
+    
+    <div id="toast-message" class="toast hidden"></div>
+
+    <div class="auth-container" style="max-width: 500px;"> 
+        
+        
         <h2>Tell us about your skills!</h2>
+        
         <p>We will use this to recommend the best business ideas for you.</p>
-
-        <form action="index.html">
-            <h3>Select your practical skills:</h3>
-            <br>
+        
+        <h3 style="text-align: left; color: #1e293b; margin-top: 20px;">Select your practical skills:</h3>
+        
+        
+        <form id="profiling-form">
             
-           <div class="checkbox-wrapper">
-                <input type="checkbox" id="skill-tailoring" name="skills" value="tailoring">
-                <label for="skill-tailoring">Tailoring & Sewing</label>
-            </div>
-            
-            <div class="checkbox-wrapper">
-                <input type="checkbox" id="skill-handicraft" name="skills" value="handicraft">
-                <label for="skill-handicraft">Handicrafts & Arts</label>
-            </div>
-
-            <div class="checkbox-wrapper">
-                <input type="checkbox" id="skill-food" name="skills" value="food">
-                <label for="skill-food">Food Preparation & Baking</label>
-            </div>
-
-            <div class="checkbox-wrapper">
-                <input type="checkbox" id="skill-digital" name="skills" value="digital">
-                <label for="skill-digital">Basic Digital Skills</label>
+            <div class="skills-list">
+                <div class="checkbox-group">
+                    <input type="checkbox" id="skill-tailoring" value="Tailoring & Sewing">
+                    <label for="skill-tailoring">Tailoring & Sewing</label>
+                </div>
+                
+                <div class="checkbox-group">
+                    <input type="checkbox" id="skill-handicrafts" value="Handicrafts & Arts">
+                    <label for="skill-handicrafts">Handicrafts & Arts</label>
+                </div>
+                
+                <div class="checkbox-group">
+                    <input type="checkbox" id="skill-food" value="Food Preparation & Baking">
+                    <label for="skill-food"> Food Preparation & Baking</label>
+                </div>
+                
+                <div class="checkbox-group">
+                    <input type="checkbox" id="skill-digital" value="Basic Digital Skills">
+                    <label for="skill-digital">Basic Digital Skills</label>
+                </div>
             </div>
 
             <button type="submit">Find Business Ideas</button>
+            
         </form>
     </div>
+
+
+    <script src="global.js" defer></script>
+    <script src="dashboard.js" defer></script>
 </body>
 </html>

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Control - EntreSkill Hub</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="admin-page">
+
+    <div id="toast-message" class="toast hidden"></div>
+
+   <div class="admin-nav">
+        <h2>⚙️ Admin Control Center</h2>
+        
+        <div style="display: flex; align-items: center; gap: 20px;">
+            <div class="links">
+                <a href="#">Student View</a>
+                <a href="#">Mentor View</a>
+                <a href="#">Logout</a>
+            </div>
+            
+            <button id="theme-toggle" class="theme-icon-btn" aria-label="Toggle Theme">
+                <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+                <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+            </button>
+        </div>
+    </div>
+
+    <div class="admin-container">
+        
+        <div class="stats-grid">
+            <div class="stat-card blue">
+                <h3>Total Users</h3>
+                <p class="number">1,248</p>
+            </div>
+            <div class="stat-card green">
+                <h3>Active Mentors</h3>
+                <p class="number">42</p>
+            </div>
+            <div class="stat-card yellow">
+                <h3>Ideas Bookmarked</h3>
+                <p class="number">3,890</p>
+            </div>
+        </div>
+
+        <div class="admin-panels">
+            <div class="panel">
+                <h3>🛡️ Pending Mentor Applications</h3>
+                
+                <div class="admin-list-item" id="mentor-app-1">
+                    <div class="user-info">
+                        <h4>Dr. Rajesh Sharma</h4>
+                        <p>Expertise: Small Business Finance & Loans</p>
+                    </div>
+                    <div>
+                        <button class="btn-approve" onclick="adminAction('mentor-app-1', 'Approved')">Approve</button>
+                        <button class="btn-reject" onclick="adminAction('mentor-app-1', 'Rejected')">Reject</button>
+                    </div>
+                </div>
+
+                <div class="admin-list-item" id="mentor-app-2">
+                    <div class="user-info">
+                        <h4>Sunita Desai</h4>
+                        <p>Expertise: Textile & Handicraft Export</p>
+                    </div>
+                    <div>
+                        <button class="btn-approve" onclick="adminAction('mentor-app-2', 'Approved')">Approve</button>
+                        <button class="btn-reject" onclick="adminAction('mentor-app-2', 'Rejected')">Reject</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel">
+                <h3>📑 Pending Training Content</h3>
+                
+                <div class="admin-list-item" id="content-1">
+                    <div class="user-info">
+                        <h4>"How to Register for MSME"</h4>
+                        <p>Uploaded by: Mentor Amit Kumar</p>
+                    </div>
+                    <div>
+                        <button class="btn-approve" onclick="adminAction('content-1', 'Published')">Publish</button>
+                        <button class="btn-reject" onclick="adminAction('content-1', 'Deleted')">Delete</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="global.js" defer></script>
+    <script src="admin.js" defer></script>
+</body>
+</html>

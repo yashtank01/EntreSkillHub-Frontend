@@ -6,57 +6,57 @@
     <title>Find Mentors - EntreSkill Hub</title>
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body class="dashboard-page">
 
-    <nav class="navbar">
-        <h1>EntreSkill Hub</h1>
-        <div class="nav-links">
-            <a href="index.html">Dashboard</a>
-            <a href="mentors.html">Find Mentors</a>
-            <a href="profiling.html">Update Skills</a>
-        </div>
-    </nav>
-
-    <main class="container">
-        
-        <section class="dashboard-section">
-            <h2>Mentor Directory</h2>
-            <p>Connect with experienced business owners who can guide your journey.</p>
-            
-            <div class="card-grid">
-                
-                <div class="idea-card">
-                    <h3>Anita Sharma</h3>
-                    <p><strong>Expertise:</strong> Boutique Tailoring, Local Marketing</p>
-                    <p><strong>Experience:</strong> 12 years running 'Anita Designs'.</p>
-                    <div class="card-buttons">
-                        <button class="action-btn" onclick="requestMentor(this)">Request Session</button>
-                    </div>
-                </div>
-
-                <div class="idea-card">
-                    <h3>Rahul Verma</h3>
-                    <p><strong>Expertise:</strong> Digital Freelancing, Upwork</p>
-                    <p><strong>Experience:</strong> Top-Rated Plus virtual assistant.</p>
-                    <div class="card-buttons">
-                        <button class="action-btn" onclick="requestMentor(this)">Request Session</button>
-                    </div>
-                </div>
-
-                <div class="idea-card">
-                    <h3>Priya Patel</h3>
-                    <p><strong>Expertise:</strong> Food Preparation, FSSAI Registration</p>
-                    <p><strong>Experience:</strong> Founder of 'FreshBites Cloud Kitchen'.</p>
-                    <div class="card-buttons">
-                        <button class="action-btn" onclick="requestMentor(this)">Request Session</button>
-                    </div>
-                </div>
-
+    <div class="nav" style="display: flex; justify-content: space-between; align-items: center; background: transparent; padding: 20px 0; margin-bottom: 20px; border-bottom: 1px solid #e2e8f0;">
+        <h2 style="margin: 0; font-size: 1.5em;">EntreSkill Hub</h2>
+        <div style="display: flex; align-items: center; gap: 20px;">
+            <div class="links">
+                <a href="dashboard.html" style="text-decoration: none; font-weight: bold; margin-right: 15px;">Dashboard</a>
+                <a href="mentors.html" style="text-decoration: none; font-weight: bold; margin-right: 15px; color: #10b981;">Find Mentors</a>
+                <a href="progress.html" style="text-decoration: none; font-weight: bold;">My Progress</a>
             </div>
-        </section>
+            
+            <button id="theme-toggle" class="theme-icon-btn" aria-label="Toggle Theme" style="margin: 0; padding: 5px;">
+                <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+                <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+            </button>
+        </div>
+    </div>
 
-    </main>
+    <div style="max-width: 1000px; margin: 0 auto; padding: 0 20px;">
+        <h2 style="margin-bottom: 10px;">Mentor Directory</h2>
+        <p>Connect with experienced business owners who can guide your journey.</p>
 
-    <script src="script.js"></script>
+        <div class="grid">
+            
+            <div class="idea-card" style="border-top: 4px solid #3b82f6;">
+                <h3 style="margin-bottom: 10px;">Anita Sharma</h3>
+                <p><strong>Expertise:</strong> Boutique Tailoring, Local Marketing</p>
+                <p><strong>Experience:</strong> 12 years running 'Anita Designs'.</p>
+                <button class="btn" onclick="requestMentor(this, 'Anita Sharma')">Request Session</button>
+            </div>
+
+            <div class="idea-card" style="border-top: 4px solid  #3b82f6;">
+                <h3 style="margin-bottom: 10px;">Rahul Verma</h3>
+                <p><strong>Expertise:</strong> Digital Freelancing, Upwork</p>
+                <p><strong>Experience:</strong> Top-Rated Plus virtual assistant.</p>
+                <button class="btn" onclick="requestMentor(this, 'Rahul Verma')">Request Session</button>
+            </div>
+
+            <div class="idea-card" style="border-top: 4px solid  #3b82f6;">
+                <h3 style="margin-bottom: 10px;">Priya Patel</h3>
+                <p><strong>Expertise:</strong> Food Preparation, FSSAI Registration</p>
+                <p><strong>Experience:</strong> Founder of 'FreshBites Cloud Kitchen'.</p>
+                <button class="btn" onclick="requestMentor(this, 'Priya Patel')">Request Session</button>
+            </div>
+
+        </div>
+    </div>
+
+    <div id="toast-message" class="toast hidden"></div>
+
+    <script src="global.js" defer></script>
+    <script src="mentors.js" defer></script>
 </body>
-</html>         
+</html>
