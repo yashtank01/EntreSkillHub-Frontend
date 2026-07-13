@@ -36,7 +36,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const password = document.getElementById('reg-password').value;
 
             try {
-                const response = await fetch('http://localhost:5000/api/register', {
+                const response = await fetch('https://entireskillhub-backend.onrender.com/api/register', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ name, email, password })
@@ -63,7 +63,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const password = document.getElementById('login-password').value;
 
             try {
-                const response = await fetch('http://localhost:5000/api/login', {
+                const response = await fetch('https://entireskillhub-backend.onrender.com/api/login', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ email, password })

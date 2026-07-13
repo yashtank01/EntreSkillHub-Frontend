@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", () => {
         async function loadProgress() {
             try {
                 // Fetch Ideas
-                const ideasResponse = await fetch('http://localhost:5000/api/saved-ideas');
+                const ideasResponse = await fetch('https://entireskillhub-backend.onrender.com/api/saved-ideas');
                 const ideas = await ideasResponse.json();
                 ideasContainer.innerHTML = ''; 
 
@@ -29,7 +29,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
 
                 // Fetch Mentors
-                const mentorsResponse = await fetch('http://localhost:5000/api/mentor-requests');
+                const mentorsResponse = await fetch('https://entireskillhub-backend.onrender.com/api/mentor-requests');
                 const mentors = await mentorsResponse.json();
                 mentorsContainer.innerHTML = ''; 
 

@@ -37,7 +37,7 @@ document.addEventListener("DOMContentLoaded", () => {
 // --- SAVE IDEA LOGIC ---
 async function saveIdeaToDB(ideaName) {
     try {
-        const response = await fetch('http://localhost:5000/api/save-idea', {
+        const response = await fetch('https://entireskillhub-backend.onrender.com/api/save-idea', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ idea: ideaName })

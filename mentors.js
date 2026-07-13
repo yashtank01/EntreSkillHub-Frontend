@@ -11,7 +11,7 @@ async function requestMentor(buttonElement, mentorName) {
     buttonElement.disabled = true;
 
     try {
-        const response = await fetch('http://localhost:5000/api/request-mentor', {
+        const response = await fetch('https://entireskillhub-backend.onrender.com/api/request-mentor', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ mentor: mentorName }) 
@@ -39,7 +39,7 @@ async function handleRequest(cardId, action) {
     const studentName = card.querySelector('h4').innerText;
 
     try {
-        const response = await fetch('http://localhost:5000/api/manage-request', {
+        const response = await fetch('https://entireskillhub-backend.onrender.com/api/manage-request', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ action: action, studentName: studentName })
@@ -66,7 +66,7 @@ document.addEventListener("DOMContentLoaded", () => {
             event.preventDefault();
             const inputs = uploadForm.querySelectorAll('input, select');
             try {
-                const response = await fetch('http://localhost:5000/api/upload-resource', {
+                const response = await fetch('https://entireskillhub-backend.onrender.com/api/upload-resource', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ title: inputs[0].value, category: inputs[1].value, url: inputs[2].value })
