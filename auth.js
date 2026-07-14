@@ -34,6 +34,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const name = document.getElementById('reg-name').value;
             const email = document.getElementById('reg-email').value;
             const password = document.getElementById('reg-password').value;
+            const role = document.getElementById('reg-role').value;
 
             try {
                 const response = await fetch('https://entireskillhub-backend.onrender.com/api/register', {
@@ -71,13 +72,16 @@ document.addEventListener("DOMContentLoaded", () => {
                 const data = await response.json();
                 if (response.ok) {
                     showNotification('✅ ' + data.message, true);
-                    setTimeout(() => { window.location.href = 'dashboard.html'; }, 1500);
-                } else {
-                    showNotification('❌ Login failed: ' + data.error, false);
-                }
-            } catch (error) {
-                showNotification('❌ Could not connect to the server.', false);
-            }
-        });
-    }
-});
+                   setTimeout(() => {
+        if (data.role === 'mentor') {
+            window.location.href = `mentor-dashboard.html?name=${encodeURIComponent(data.name)}`;
+        } else if (data.role === 'admin') {
+            window.location.href = `admin-dashboard.html?name=${encodeURIComponent(data.name)}`;
+        } else {
+            // Default student route
+            window.location.href = `dashboard.html?name=${encodeURIComponent(data.name)}`;
+        }
+    }, 1500);
+} else {
+    showNotification(`❌ ${data.error}`, false);
+}
