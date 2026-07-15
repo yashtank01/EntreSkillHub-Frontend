@@ -55,6 +55,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     registerForm.reset();
                     setTimeout(toggleForms, 1500); 
                 } else {
+                    
                     showNotification('❌ Registration failed: ' + data.error, false);
                 }
             } catch (error) {
@@ -83,6 +84,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 
                 if (response.ok) {
                     showNotification('✅ ' + data.message, true);
+                    localStorage.setItem('userRole', data.role);
                     
                     // Smart redirect based on role
                     setTimeout(() => {
@@ -96,6 +98,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         }
                     }, 1500);
                 } else {
+                    alert("Backend says: " + data.error);
                     showNotification(`❌ ${data.error}`, false);
                 }
             } catch (error) {
