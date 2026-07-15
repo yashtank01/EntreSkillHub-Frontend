@@ -27,22 +27,29 @@ function togglePassword(inputId, iconElement) {
 
 document.addEventListener("DOMContentLoaded", () => {
     
+    // --- REGISTER FORM LOGIC ---
     const registerForm = document.getElementById('register-form');
     if (registerForm) {
         registerForm.addEventListener('submit', async function(event) {
-            event.preventDefault(); 
+            event.preventDefault(); // 🛑 Stops the refresh
+            
             const name = document.getElementById('reg-name').value;
             const email = document.getElementById('reg-email').value;
             const password = document.getElementById('reg-password').value;
-            const role = document.getElementById('reg-role').value;
+            
+            // Safe check for role in case the dropdown isn't in your HTML yet
+            const roleElement = document.getElementById('reg-role');
+            const role = roleElement ? roleElement.value : 'student';
 
             try {
                 const response = await fetch('https://entireskillhub-backend.onrender.com/api/register', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ name, email, password })
+                    body: JSON.stringify({ name, email, password, role }) // Added role here!
                 });
+                
                 const data = await response.json();
+                
                 if (response.ok) {
                     showNotification('🎉 ' + data.message + ' You can now log in!', true);
                     registerForm.reset();
@@ -56,10 +63,12 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
+    // --- LOGIN FORM LOGIC ---
     const loginForm = document.getElementById('login-form');
     if (loginForm) {
         loginForm.addEventListener('submit', async function(event) {
-            event.preventDefault(); 
+            event.preventDefault(); // 🛑 Stops the refresh
+            
             const email = document.getElementById('login-email').value;
             const password = document.getElementById('login-password').value;
 
@@ -69,19 +78,29 @@ document.addEventListener("DOMContentLoaded", () => {
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ email, password })
                 });
+                
                 const data = await response.json();
+                
                 if (response.ok) {
                     showNotification('✅ ' + data.message, true);
-                   setTimeout(() => {
-        if (data.role === 'mentor') {
-            window.location.href = `mentor-dashboard.html?name=${encodeURIComponent(data.name)}`;
-        } else if (data.role === 'admin') {
-            window.location.href = `admin-dashboard.html?name=${encodeURIComponent(data.name)}`;
-        } else {
-            // Default student route
-            window.location.href = `dashboard.html?name=${encodeURIComponent(data.name)}`;
-        }
-    }, 1500);
-} else {
-    showNotification(`❌ ${data.error}`, false);
-}
+                    
+                    // Smart redirect based on role
+                    setTimeout(() => {
+                        if (data.role === 'mentor') {
+                            window.location.href = `mentor-dashboard.html?name=${encodeURIComponent(data.name)}`;
+                        } else if (data.role === 'admin') {
+                            window.location.href = `admin-dashboard.html?name=${encodeURIComponent(data.name)}`;
+                        } else {
+                            // Default student route
+                            window.location.href = `dashboard.html?name=${encodeURIComponent(data.name)}`;
+                        }
+                    }, 1500);
+                } else {
+                    showNotification(`❌ ${data.error}`, false);
+                }
+            } catch (error) {
+                showNotification('❌ Could not connect to the server.', false);
+            }
+        });
+    }
+});
