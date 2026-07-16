@@ -24,6 +24,33 @@ function togglePassword(inputId, iconElement) {
         iconElement.innerHTML = closedEyeSVG;
     }
 }
+// --- FORGOT PASSWORD LOGIC ---
+async function handleForgotPassword() {
+    // 1. Pop up a box asking the user for their email
+    const email = prompt("Enter your registered email address to receive a password reset link:");
+    
+    // If they click cancel or leave it blank, do nothing
+    if (!email) return;
+
+    // 2. Send that email to your new backend route!
+    try {
+        const response = await fetch('https://entireskillhub-backend.onrender.com/api/forgot-password', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email: email }) // 👈 This is where we send the user's email!
+        });
+        
+        const data = await response.json();
+        
+        if (response.ok) {
+            showNotification('✉️ ' + data.message, true);
+        } else {
+            showNotification('❌ ' + data.error, false);
+        }
+    } catch (error) {
+        showNotification('❌ Could not connect to the server.', false);
+    }
+}
 
 document.addEventListener("DOMContentLoaded", () => {
     
@@ -55,7 +82,6 @@ document.addEventListener("DOMContentLoaded", () => {
                     registerForm.reset();
                     setTimeout(toggleForms, 1500); 
                 } else {
-                    
                     showNotification('❌ Registration failed: ' + data.error, false);
                 }
             } catch (error) {
@@ -83,22 +109,36 @@ document.addEventListener("DOMContentLoaded", () => {
                 const data = await response.json();
                 
                 if (response.ok) {
-                    showNotification('✅ ' + data.message, true);
+                    // Give them the VIP Pass in local memory
                     localStorage.setItem('userRole', data.role);
                     
-                    // Smart redirect based on role
-                    setTimeout(() => {
-                        if (data.role === 'mentor') {
-                            window.location.href = `mentor-dashboard.html?name=${encodeURIComponent(data.name)}`;
-                        } else if (data.role === 'admin') {
-                            window.location.href = `admin-dashboard.html?name=${encodeURIComponent(data.name)}`;
-                        } else {
-                            // Default student route
+                    // 🛑 NEW LOGIC: Check for unapproved mentors right away!
+                    if (data.role === 'mentor' && data.isMentorApproved !== true) {
+                        
+                        // Show the custom toast notification on the login screen
+                        showNotification('Login successful! Your Mentor application is pending for Admin approval. Redirecting to Student Dashboard...', true);
+                        
+                        // Give them 2.5 seconds to read it, then redirect safely
+                        setTimeout(() => {
                             window.location.href = `dashboard.html?name=${encodeURIComponent(data.name)}`;
-                        }
-                    }, 1500);
+                        }, 3500);
+                        
+                    } else {
+                        // NORMAL LOGIN for Admins, Students, and APPROVED Mentors
+                        showNotification('✅ ' + data.message, true);
+                        
+                        setTimeout(() => {
+                            if (data.role === 'mentor') {
+                                window.location.href = `mentor-dashboard.html?name=${encodeURIComponent(data.name)}`;
+                            } else if (data.role === 'admin') {
+                                window.location.href = `admin-dashboard.html?name=${encodeURIComponent(data.name)}`;
+                            } else {
+                                // Default student route
+                                window.location.href = `dashboard.html?name=${encodeURIComponent(data.name)}`;
+                            }
+                        }, 1500);
+                    }
                 } else {
-                    alert("Backend says: " + data.error);
                     showNotification(`❌ ${data.error}`, false);
                 }
             } catch (error) {
