@@ -89,6 +89,34 @@
         </div>
 
     </div>
+   <!-- CONTENT UPLOAD SECTION -->
+<div class="panel">
+    <h3>📤 Upload New Content</h3>
+    
+    <form id="upload-content-form">
+        <input type="text" id="content-title" class="form-input" placeholder="Content Title (e.g., How to start freelancing)" required>
+        
+        <div class="form-row">
+            <select id="content-type" class="form-input half-width" required>
+                <option value="" disabled selected>Select Type</option>
+                <option value="video">YouTube Video</option>
+                <option value="article">Article / Blog</option>
+            </select>
+            
+            <select id="content-category" class="form-input half-width" required>
+                <option value="" disabled selected>Select Category</option>
+                <option value="Skill Building">Skill Building</option>
+                <option value="Business Basics">Business Basics</option>
+                <option value="Success Stories">Success Stories</option>
+            </select>
+        </div>
+
+        <textarea id="content-body" class="form-input" placeholder="Paste YouTube link OR type your full article here..." required rows="5"></textarea>
+        
+        <button type="submit" class="submit-btn">Publish Content</button>
+    </form>
+</div>
+        
 
     <script src="global.js" defer></script>
     <script src="admin.js" defer></script>

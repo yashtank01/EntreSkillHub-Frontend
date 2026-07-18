@@ -48,23 +48,36 @@
             </div>
         </div>
 
-        <div class="panel">
-            <h3>📤 Upload Training Resource</h3>
-            <p class="upload-desc">Share links to videos, articles, or checklists to help students.</p>
+       <!-- CONTENT UPLOAD SECTION -->
+<div class="panel">
+    <h3>📤 Upload New Content</h3>
+    
+    <form id="upload-content-form">
+        <input type="text" id="content-title" class="form-input" placeholder="Content Title (e.g., How to start freelancing)" required>
+        
+        <div class="form-row">
+            <select id="content-type" class="form-input half-width" required>
+                <option value="" disabled selected>Select Type</option>
+                <option value="video">YouTube Video</option>
+                <option value="article">Article / Blog</option>
+            </select>
             
-            <form id="upload-resource-form">
-                <input type="text" placeholder="Resource Title (e.g., MSME Registration Guide)" required>
-                <select required>
-                    <option value="" disabled selected>Select Category...</option>
-                    <option value="legal">Legal & Registration</option>
-                    <option value="marketing">Marketing Basics</option>
-                    <option value="skills">Core Skills Training</option>
-                </select>
-                <input type="url" placeholder="Resource URL (YouTube, Drive, etc.)" required>
-                <button type="submit">Upload to Platform</button>
-            </form>
+            <select id="content-category" class="form-input half-width" required>
+                <option value="" disabled selected>Select Category</option>
+                <option value="Skill Building">Skill Building</option>
+                <option value="Business Basics">Business Basics</option>
+                <option value="Success Stories">Success Stories</option>
+            </select>
         </div>
-    </div>
+
+        <textarea id="content-body" class="form-input" placeholder="Paste YouTube link OR type your full article here..." required rows="5"></textarea>
+        
+        <button type="submit" class="submit-btn">Publish Content</button>
+    </form>
+</div>
+
+    
+    
 
     <div id="toast-message" class="toast hidden"></div>
 
