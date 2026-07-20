@@ -4,85 +4,85 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mentor Portal - EntreSkill Hub</title>
-    <script src="mentor-security.js"></script>
+     <script src="security.js" ></script>
     <link rel="stylesheet" href="style.css">
 </head>
 <body class="mentor-page">
 
-    <div class="nav" style="display: flex; justify-content: space-between; align-items: center; background: transparent; padding: 20px 0; margin-bottom: 20px; border-bottom: 1px solid #e2e8f0;">
-        <h2 style="margin: 0; font-size: 1.5em;">EntreSkill Mentor Portal</h2>
-        <div style="display: flex; align-items: center; gap: 20px;">
-            <div class="links">
-                <a href="dashboard.html" style="text-decoration: none; font-weight: bold; margin-right: 15px;">➔ Switch to Student View</a>
-                <a href="#" style="text-decoration: none; font-weight: bold;">My Profile</a>
-            </div>
-            <button id="theme-toggle" class="theme-icon-btn" aria-label="Toggle Theme" style="margin: 0; padding: 5px;">
-                <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+    <!-- Fixed: Removed hardcoded colors. Now it switches perfectly! -->
+    <div class="universal-nav" style="padding: 20px 40px; margin-bottom: 30px;">
+        <h2 id="mentor-welcome">Welcome, Mentor!</h2>
+        <div class="nav-right-controls">
+            <a href="dashboard.html" class="nav-link">➔ Switch to Student View</a>
+            <a href="#" class="nav-link">My Profile</a>
+            <button id="theme-toggle" class="theme-icon-btn" aria-label="Toggle Theme">
+               <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
                 <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
             </button>
         </div>
     </div>
 
-    <div class="mentor-container" style="max-width: 1000px; margin: 0 auto;">
-        <div class="panel">
-            <h3>📬 Incoming Mentee Requests</h3>
+    <div class="mentor-container" style="max-width: 1000px; margin: 0 auto; display: flex; gap: 30px; flex-wrap: wrap;">
+        
+        <!-- LEFT PANEL: INCOMING REQUESTS -->
+        <div class="panel" style="flex: 1; min-width: 300px;">
+            <h3 style="border-bottom: 2px solid #10b981; padding-bottom: 10px;">📬 Incoming Mentee Requests</h3>
             
             <div class="request-card" id="req-1">
-                <h4>Priya Patel</h4>
+                <h4>Sanya Gupta</h4>
                 <p><strong>Goal:</strong> Wants to start a Tailoring Boutique</p>
-                <p><strong>Status:</strong> Pending Approval</p>
+                <p><strong>Status:</strong> <span style="color: #f59e0b; font-weight: bold;">Pending Approval</span></p>
                 <div class="btn-group">
-                    <button class="btn-accept" onclick="handleRequest('req-1', 'accepted')">Accept</button>
-                    <button class="btn-decline" onclick="handleRequest('req-1', 'declined')">Decline</button>
+                    <button class="btn btn-accept" onclick="handleRequest('req-1', 'accepted')">Accept</button>
+                    <button class="btn btn-decline" onclick="handleRequest('req-1', 'declined')">Decline</button>
                 </div>
             </div>
 
             <div class="request-card" id="req-2">
-                <h4>Amit Kumar</h4>
+                <h4>Rohan Das</h4>
                 <p><strong>Goal:</strong> Setting up an Electronics Repair Kiosk</p>
-                <p><strong>Status:</strong> Pending Approval</p>
+                <p><strong>Status:</strong> <span style="color: #f59e0b; font-weight: bold;">Pending Approval</span></p>
                 <div class="btn-group">
-                    <button class="btn-accept" onclick="handleRequest('req-2', 'accepted')">Accept</button>
-                    <button class="btn-decline" onclick="handleRequest('req-2', 'declined')">Decline</button>
+                    <button class="btn btn-accept" onclick="handleRequest('req-2', 'accepted')">Accept</button>
+                    <button class="btn btn-decline" onclick="handleRequest('req-2', 'declined')">Decline</button>
                 </div>
             </div>
         </div>
 
-       <!-- CONTENT UPLOAD SECTION -->
-<div class="panel">
-    <h3>📤 Upload New Content</h3>
-    
-    <form id="upload-content-form">
-        <input type="text" id="content-title" class="form-input" placeholder="Content Title (e.g., How to start freelancing)" required>
-        
-        <div class="form-row">
-            <select id="content-type" class="form-input half-width" required>
-                <option value="" disabled selected>Select Type</option>
-                <option value="video">YouTube Video</option>
-                <option value="article">Article / Blog</option>
-            </select>
+        <!-- RIGHT PANEL: CONTENT UPLOAD SECTION -->
+        <div class="panel" style="flex: 1; min-width: 300px;">
+            <h3 style="border-bottom: 2px solid #3b82f6; padding-bottom: 10px;">📤 Upload New Content</h3>
             
-            <select id="content-category" class="form-input half-width" required>
-                <option value="" disabled selected>Select Category</option>
-                <option value="Skill Building">Skill Building</option>
-                <option value="Business Basics">Business Basics</option>
-                <option value="Success Stories">Success Stories</option>
-            </select>
+            <form id="upload-content-form">
+                <input type="text" id="content-title" class="form-input" placeholder="Content Title (e.g., How to start freelancing)" required>
+                
+                <div class="form-row">
+                    <select id="content-type" class="form-input half-width" required>
+                        <option value="" disabled selected>Select Type</option>
+                        <option value="video">YouTube Video</option>
+                        <option value="article">Article / Blog</option>
+                        <option value="checklist">Checklist</option>
+                    </select>
+                    
+                    <select id="content-category" class="form-input half-width" required>
+                        <option value="" disabled selected>Select Category</option>
+                        <option value="Food Preparation & Baking">Food Preparation</option>
+                        <option value="Tailoring & Sewing">Tailoring & Sewing</option>
+                        <option value="Basic Digital Skills">Digital Skills</option>
+                        <option value="Handicrafts & Arts">Handicrafts & Arts</option>
+                        <option value="Universal">Universal / General</option>
+                    </select>
+                </div>
+
+                <textarea id="content-body" class="form-input" placeholder="Paste YouTube link OR type your full article here..." required rows="5"></textarea>
+                
+                <button type="submit" class="submit-btn">Publish Content</button>
+            </form>
         </div>
-
-        <textarea id="content-body" class="form-input" placeholder="Paste YouTube link OR type your full article here..." required rows="5"></textarea>
-        
-        <button type="submit" class="submit-btn">Publish Content</button>
-    </form>
-</div>
-
-    
-    
+    </div>
 
     <div id="toast-message" class="toast hidden"></div>
-
     <script src="global.js" defer></script>
     <script src="mentors.js" defer></script>
-
 </body>
 </html>

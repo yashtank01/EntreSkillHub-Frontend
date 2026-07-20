@@ -3,24 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Control - EntreSkill Hub</title>
-    <script src="security.js"></script>
+    <title>Admin Dashboard - EntreSkill Hub</title>
+      <script src="security.js" ></script>
     <link rel="stylesheet" href="style.css">
 </head>
 <body class="admin-page">
 
     <div id="toast-message" class="toast hidden"></div>
 
-   <div class="admin-nav">
-        <h2>⚙️ Admin Control Center</h2>
-        
-        <div style="display: flex; align-items: center; gap: 20px;">
-            <div class="links">
-                <a href="#">Student View</a>
-                <a href="#">Mentor View</a>
-                <a href="#">Logout</a>
-            </div>
-            
+    <!-- Removed hardcoded background so Dark Mode works! -->
+    <div class="universal-nav" style="padding: 20px 40px; margin-bottom: 30px;">
+        <h2 id="admin-title">⚙️ Admin Control Center</h2>
+        <div class="nav-right-controls">
+            <a href="dashboard.html" class="nav-link">➔ Live Website</a>
             <button id="theme-toggle" class="theme-icon-btn" aria-label="Toggle Theme">
                 <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
                 <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
@@ -28,95 +23,48 @@
         </div>
     </div>
 
-    <div class="admin-container">
+    <div class="admin-container" style="max-width: 1100px; margin: 0 auto; padding: 0 20px;">
         
-        <div class="stats-grid">
-            <div class="stat-card blue">
-                <h3>Total Users</h3>
-                <p class="number">1,248</p>
+        <!-- REAL STATS GRID -->
+        <div class="stats-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-bottom: 40px;">
+            <div class="stat-card" style="border-top-color: #3b82f6;">
+                <h3>Total Students</h3>
+                <div class="number" id="stat-users">Loading...</div>
             </div>
-            <div class="stat-card green">
+            <div class="stat-card" style="border-top-color: #10b981;">
                 <h3>Active Mentors</h3>
-                <p class="number">42</p>
+                <div class="number" id="stat-mentors">Loading...</div>
             </div>
-            <div class="stat-card yellow">
+            <div class="stat-card" style="border-top-color: #f59e0b;">
                 <h3>Ideas Bookmarked</h3>
-                <p class="number">3,890</p>
+                <div class="number" id="stat-ideas">Loading...</div>
+            </div>
+            <div class="stat-card" style="border-top-color: #8b5cf6;">
+                <h3>Pending Content</h3>
+                <div class="number" id="stat-pending">0</div>
             </div>
         </div>
 
-        <div class="admin-panels">
-            <div class="panel">
-                <h3>🛡️ Pending Mentor Applications</h3>
-                
-                <div class="admin-list-item" id="mentor-app-1">
-                    <div class="user-info">
-                        <h4>Dr. Rajesh Sharma</h4>
-                        <p>Expertise: Small Business Finance & Loans</p>
-                    </div>
-                    <div>
-                        <button class="btn-approve" onclick="adminAction('mentor-app-1', 'Approved')">Approve</button>
-                        <button class="btn-reject" onclick="adminAction('mentor-app-1', 'Rejected')">Reject</button>
-                    </div>
-                </div>
-
-                <div class="admin-list-item" id="mentor-app-2">
-                    <div class="user-info">
-                        <h4>Sunita Desai</h4>
-                        <p>Expertise: Textile & Handicraft Export</p>
-                    </div>
-                    <div>
-                        <button class="btn-approve" onclick="adminAction('mentor-app-2', 'Approved')">Approve</button>
-                        <button class="btn-reject" onclick="adminAction('mentor-app-2', 'Rejected')">Reject</button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="panel">
-                <h3>📑 Pending Training Content</h3>
-                
-                <div class="admin-list-item" id="content-1">
-                    <div class="user-info">
-                        <h4>"How to Register for MSME"</h4>
-                        <p>Uploaded by: Mentor Amit Kumar</p>
-                    </div>
-                    <div>
-                        <button class="btn-approve" onclick="adminAction('content-1', 'Published')">Publish</button>
-                        <button class="btn-reject" onclick="adminAction('content-1', 'Deleted')">Delete</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-    </div>
-   <!-- CONTENT UPLOAD SECTION -->
-<div class="panel">
-    <h3>📤 Upload New Content</h3>
-    
-    <form id="upload-content-form">
-        <input type="text" id="content-title" class="form-input" placeholder="Content Title (e.g., How to start freelancing)" required>
-        
-        <div class="form-row">
-            <select id="content-type" class="form-input half-width" required>
-                <option value="" disabled selected>Select Type</option>
-                <option value="video">YouTube Video</option>
-                <option value="article">Article / Blog</option>
-            </select>
+        <div style="display: flex; gap: 30px; flex-wrap: wrap;">
             
-            <select id="content-category" class="form-input half-width" required>
-                <option value="" disabled selected>Select Category</option>
-                <option value="Skill Building">Skill Building</option>
-                <option value="Business Basics">Business Basics</option>
-                <option value="Success Stories">Success Stories</option>
-            </select>
-        </div>
+            <!-- LEFT PANEL: PENDING MENTOR APPROVALS -->
+            <div class="panel" style="flex: 1; min-width: 300px;">
+                <h3 style="border-bottom: 2px solid #f59e0b; padding-bottom: 10px;">👤 Pending Mentor Verifications</h3>
+                <div id="pending-mentors-container">
+                    <!-- JS will inject REAL data here -->
+                </div>
+            </div>
 
-        <textarea id="content-body" class="form-input" placeholder="Paste YouTube link OR type your full article here..." required rows="5"></textarea>
-        
-        <button type="submit" class="submit-btn">Publish Content</button>
-    </form>
-</div>
-        
+            <!-- RIGHT PANEL: REAL UPLOADED CONTENT -->
+            <div class="panel" style="flex: 1; min-width: 300px;">
+                <h3 style="border-bottom: 2px solid #8b5cf6; padding-bottom: 10px;">📄 Pending Training Content</h3>
+                <div id="pending-content-container">
+                    <!-- JS will inject REAL mentor uploads here -->
+                </div>
+            </div>
+
+        </div>
+    </div>
 
     <script src="global.js" defer></script>
     <script src="admin.js" defer></script>

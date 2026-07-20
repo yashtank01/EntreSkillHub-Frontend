@@ -7,37 +7,48 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body class="progress-page">
+    <div id="toast-message" class="toast hidden"></div>
 
-    <div class="nav">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
-            <h2 style="margin:0;">EntreSkill Hub</h2>
+    <!-- UNIVERSAL NAVIGATION -->
+    <div class="universal-nav" style="padding: 20px 40px;">
+        <h2>EntreSkill Hub</h2>
+        <div class="nav-right-controls">
+            <a href="dashboard.html" class="nav-link">Dashboard</a>
+            
             <button id="theme-toggle" class="theme-icon-btn" aria-label="Toggle Theme">
                 <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
                 <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
             </button>
         </div>
-        <div>
-            <a href="dashboard.html">Explore Ideas</a>
-            <a href="mentors.html">Find Mentors</a>
-            
-            
-        </div>
     </div>
 
+    <!-- PAGE HEADER -->
+    <div class="page-container section-margin">
+        <h2>📈 My Progress & Saved Items</h2>
+        <p>Track your bookmarked business pathways and manage your mentor requests.</p>
+    </div>
+
+    <!-- DYNAMIC PROGRESS COLUMNS -->
     <div class="progress-container">
+        
+        <!-- Column 1: Bookmarks -->
         <div class="progress-column">
             <h3>📌 Bookmarked Business Ideas</h3>
-            <div id="ideas-list">
-                <p>Loading your saved ideas...</p>
+            <!-- JS will inject the actual saved ideas here -->
+            <div id="saved-ideas-container">
+                <p style="margin-top: 15px;">Loading your saved ideas...</p>
             </div>
         </div>
 
+        <!-- Column 2: Mentors -->
         <div class="progress-column">
             <h3>✉️ Active Mentor Requests</h3>
-            <div id="mentors-list">
-                <p>Loading your mentor requests...</p>
+            <!-- JS will inject the actual mentor requests here -->
+            <div id="mentor-requests-container">
+                <p style="margin-top: 15px;">Loading your mentor requests...</p>
             </div>
         </div>
+
     </div>
 
     <script src="global.js" defer></script>

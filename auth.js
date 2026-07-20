@@ -24,33 +24,30 @@ function togglePassword(inputId, iconElement) {
         iconElement.innerHTML = closedEyeSVG;
     }
 }
-// --- FORGOT PASSWORD LOGIC ---
-async function handleForgotPassword() {
-    // 1. Pop up a box asking the user for their email
-    const email = prompt("Enter your registered email address to receive a password reset link:");
-    
-    // If they click cancel or leave it blank, do nothing
-    if (!email) return;
 
-    // 2. Send that email to your new backend route!
-    try {
-        const response = await fetch('https://entireskillhub-backend.onrender.com/api/forgot-password', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ email: email }) // 👈 This is where we send the user's email!
-        });
+// // --- FORGOT PASSWORD LOGIC ---
+// async function handleForgotPassword() {
+//     const email = prompt("Enter your registered email address to receive a password reset link:");
+//     if (!email) return;
+
+//     try {
+//         const response = await fetch('https://entireskillhub-backend.onrender.com/api/forgot-password', {
+//             method: 'POST',
+//             headers: { 'Content-Type': 'application/json' },
+//             body: JSON.stringify({ email: email }) 
+//         });
         
-        const data = await response.json();
+//         const data = await response.json();
         
-        if (response.ok) {
-            showNotification('✉️ ' + data.message, true);
-        } else {
-            showNotification('❌ ' + data.error, false);
-        }
-    } catch (error) {
-        showNotification('❌ Could not connect to the server.', false);
-    }
-}
+//         if (response.ok) {
+//             showNotification('✉️ ' + data.message, true);
+//         } else {
+//             showNotification('❌ ' + data.error, false);
+//         }
+//     } catch (error) {
+//         showNotification('❌ Could not connect to the server.', false);
+//     }
+// }
 
 document.addEventListener("DOMContentLoaded", () => {
     
@@ -58,13 +55,18 @@ document.addEventListener("DOMContentLoaded", () => {
     const registerForm = document.getElementById('register-form');
     if (registerForm) {
         registerForm.addEventListener('submit', async function(event) {
-            event.preventDefault(); // 🛑 Stops the refresh
+            event.preventDefault(); 
             
+            const submitBtn = registerForm.querySelector('button[type="submit"]');
+            const originalBtnText = submitBtn.innerText;
+            submitBtn.innerText = "⏳ Creating Account...";
+            submitBtn.disabled = true;
+            submitBtn.style.opacity = "0.7";
+            submitBtn.style.cursor = "not-allowed";
+
             const name = document.getElementById('reg-name').value;
             const email = document.getElementById('reg-email').value;
             const password = document.getElementById('reg-password').value;
-            
-            // Safe check for role in case the dropdown isn't in your HTML yet
             const roleElement = document.getElementById('reg-role');
             const role = roleElement ? roleElement.value : 'student';
 
@@ -72,20 +74,39 @@ document.addEventListener("DOMContentLoaded", () => {
                 const response = await fetch('https://entireskillhub-backend.onrender.com/api/register', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ name, email, password, role }) // Added role here!
+                    body: JSON.stringify({ name, email, password, role }) 
                 });
                 
                 const data = await response.json();
                 
                 if (response.ok) {
-                    showNotification('🎉 ' + data.message + ' You can now log in!', true);
-                    registerForm.reset();
-                    setTimeout(toggleForms, 1500); 
+                    localStorage.setItem("userEmail", email);
+                    localStorage.setItem("isLoggedIn", "true");
+                    localStorage.setItem("userRole", role);
+
+                    if (typeof showNotification === 'function') {
+                        showNotification('✅ Account created! Redirecting to setup...', true);
+                    } else {
+                        alert("✅ Account created! Let's set up your profile.");
+                    }
+
+                    setTimeout(() => {
+                        window.location.href = `profiling.html?name=${encodeURIComponent(name)}`;
+                    }, 1500); 
+
                 } else {
                     showNotification('❌ Registration failed: ' + data.error, false);
+                    submitBtn.innerText = originalBtnText;
+                    submitBtn.disabled = false;
+                    submitBtn.style.opacity = "1";
+                    submitBtn.style.cursor = "pointer";
                 }
             } catch (error) {
                 showNotification('❌ Could not connect to the server.', false);
+                submitBtn.innerText = originalBtnText;
+                submitBtn.disabled = false;
+                submitBtn.style.opacity = "1";
+                submitBtn.style.cursor = "pointer";
             }
         });
     }
@@ -94,8 +115,15 @@ document.addEventListener("DOMContentLoaded", () => {
     const loginForm = document.getElementById('login-form');
     if (loginForm) {
         loginForm.addEventListener('submit', async function(event) {
-            event.preventDefault(); // 🛑 Stops the refresh
+            event.preventDefault(); 
             
+            const submitBtn = loginForm.querySelector('button[type="submit"]');
+            const originalBtnText = submitBtn.innerText;
+            submitBtn.innerText = "⏳ Logging in...";
+            submitBtn.disabled = true;
+            submitBtn.style.opacity = "0.7";
+            submitBtn.style.cursor = "not-allowed";
+
             const email = document.getElementById('login-email').value;
             const password = document.getElementById('login-password').value;
 
@@ -109,23 +137,16 @@ document.addEventListener("DOMContentLoaded", () => {
                 const data = await response.json();
                 
                 if (response.ok) {
-                    // Give them the VIP Pass in local memory
                     localStorage.setItem('userRole', data.role);
                     
-                    // 🛑 NEW LOGIC: Check for unapproved mentors right away!
                     if (data.role === 'mentor' && data.isMentorApproved !== true) {
-                        
-                        // Show the custom toast notification on the login screen
-                        showNotification('Login successful! Your Mentor application is pending for Admin approval. Redirecting to Student Dashboard...', true);
-                        
-                        // Give them 2.5 seconds to read it, then redirect safely
+                        showNotification('Login successful! Your Mentor application is pending for Admin approval. Redirecting...', true);
                         setTimeout(() => {
                             window.location.href = `dashboard.html?name=${encodeURIComponent(data.name)}`;
                         }, 3500);
-                        
                     } else {
-                        // NORMAL LOGIN for Admins, Students, and APPROVED Mentors
                         showNotification('✅ ' + data.message, true);
+                        submitBtn.innerText = "✅ Success!"; 
                         
                         setTimeout(() => {
                             if (data.role === 'mentor') {
@@ -133,16 +154,23 @@ document.addEventListener("DOMContentLoaded", () => {
                             } else if (data.role === 'admin') {
                                 window.location.href = `admin-dashboard.html?name=${encodeURIComponent(data.name)}`;
                             } else {
-                                // Default student route
                                 window.location.href = `dashboard.html?name=${encodeURIComponent(data.name)}`;
                             }
                         }, 1500);
                     }
                 } else {
                     showNotification(`❌ ${data.error}`, false);
+                    submitBtn.innerText = originalBtnText;
+                    submitBtn.disabled = false;
+                    submitBtn.style.opacity = "1";
+                    submitBtn.style.cursor = "pointer";
                 }
             } catch (error) {
                 showNotification('❌ Could not connect to the server.', false);
+                submitBtn.innerText = originalBtnText;
+                submitBtn.disabled = false;
+                submitBtn.style.opacity = "1";
+                submitBtn.style.cursor = "pointer";
             }
         });
     }

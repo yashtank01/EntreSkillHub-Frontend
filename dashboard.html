@@ -7,14 +7,16 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body class="dashboard-page">
+   
     <div id="toast-message" class="toast hidden"></div>
+   
 
+    <!-- NAVIGATION BAR -->
     <div class="nav" style="display: flex; justify-content: space-between; align-items: center; background: transparent; padding: 20px 0; margin-bottom: 20px; border-bottom: 1px solid #e2e8f0;">
         <h2 style="margin: 0; font-size: 1.5em;">EntreSkill Hub</h2>
         <div style="display: flex; align-items: center; gap: 20px;">
             <div class="links">
                 
-                <a href="mentors.html" style="text-decoration: none; font-weight: bold; margin-right: 15px;">Find Mentors</a>
                 <a href="progress.html" style="text-decoration: none; font-weight: bold;">My Progress</a>
                 <a href="index.html" style="text-decoration: none; font-weight: bold;">Home</a>
             </div>
@@ -25,67 +27,42 @@
         </div>
     </div>
 
+    <!-- BUSINESS PATHWAYS SECTION -->
     <div style="max-width: 1000px; margin: 0 auto; padding: 0 20px;">
-        <h2 id="welcome-message" style="margin-bottom: 10px;">Welcome to your Dashboard!</h2>
-        <p>Explore recommended business pathways based on your skills. Bookmark the ones you want to pursue!</p>
+        <div class="dashboard-header">
+            <h2 id="welcome-message" style="margin-bottom: 10px;">Welcome to your Dashboard!</h2>
+            <p>Explore recommended business pathways based on your skills. Bookmark the ones you want to pursue!</p>
+        </div>
 
-        <div class="grid">
-            
-            <div class="idea-card">
-                <h3>Cloud Kitchen / Tiffin Service</h3>
-                <p><strong>Skill Track:</strong> Food Preparation</p>
-                <p>Start a low-cost food delivery business from your own kitchen.</p>
-                <div class="video-container">
-                    <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" allowfullscreen></iframe>
-                </div>
-               <button class="btn" onclick="saveIdeaToDB('Cloud Kitchen / Tiffin Service')">Bookmark Idea</button>
-            </div>
-
-            <div class="idea-card">
-                <h3>Local Boutique & Alterations</h3>
-                <p><strong>Skill Track:</strong> Tailoring & Handicrafts</p>
-                <p>Turn your sewing skills into a profitable local fashion business.</p>
-                <div class="video-container">
-                    <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" allowfullscreen></iframe>
-                </div>
-               <button class="btn" onclick="saveIdeaToDB('Local Boutique & Alterations')">Bookmark Idea</button>
-            </div>
-
-            <div class="idea-card">
-                <h3>Virtual Assistant Services</h3>
-                <p><strong>Skill Track:</strong> Digital Literacy</p>
-                <p>Offer remote admin, email, and schedule management to clients globally.</p>
-                <div class="video-container">
-                    <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" allowfullscreen></iframe>
-                </div>
-               <button class="btn" onclick="saveIdeaToDB('Virtual Assistant Services')">Bookmark Idea</button>
-            </div>
-
-            <div class="idea-card">
-                <h3>Electronics Repair Kiosk</h3>
-                <p><strong>Skill Track:</strong> Repair & Maintenance</p>
-                <p>Provide highly demanded mobile and appliance repair services.</p>
-                <div class="video-container">
-                    <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" allowfullscreen></iframe>
-                </div>
-               <button class="btn" onclick="saveIdeaToDB('Electronics Repair Kiosk')">Bookmark Idea</button>
-            </div>
-
+        <!-- 🛑 NEW: JavaScript will inject the personalized business ideas here -->
+        <div id="business-ideas-feed" class="grid">
+            <!-- Dynamic Business Idea Cards will appear here via global.js -->
         </div>
     </div>
-    <br>
-    <!-- LEARNING RESOURCES SECTION (For Students) -->
-<div class="panel">
-    <h3>📚 Learning Resources & Training</h3>
-    <p style="color: #64748b; margin-bottom: 20px;">Watch tutorials and read guides uploaded by our mentors to grow your skills.</p>
+      <!-- RECOMMENDED MENTORS SECTION -->
+    <div style="margin-top: 50px; margin-bottom: 50px;">
+        <h2>🧑‍🏫 Recommended Mentors</h2>
+        <p>Connect with experienced business owners in your specific skill area.</p>
+        
+        <div id="mentors-feed" style="margin-top: 20px; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
+            <p>Loading mentors...</p>
+        </div>
+    </div>
     
-    <!-- This empty div is where our JavaScript will inject the content cards -->
-    <div id="student-content-feed" class="content-grid">
-        <p>Loading latest training resources...</p>
+    
+    
+    <!-- LEARNING RESOURCES SECTION -->
+<div style="margin-top: 40px;">
+    <h2>📚 Learning Resources & Training</h2>
+    <p>Read guides and use checklists to grow your skills.</p>
+    
+    <!-- We will inject the Articles and Checklists here! -->
+    <div id="learning-resources-feed" style="margin-top: 20px; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
+        <p>Loading training content...</p>
     </div>
 </div>
 
-  <script src="global.js" defer></script>
+    <script src="global.js" defer></script>
     <script src="dashboard.js" defer></script>
 </body>
 </html>

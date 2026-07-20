@@ -10,47 +10,40 @@
     
     <div id="toast-message" class="toast hidden"></div>
 
-    <div class="auth-container" style="max-width: 500px;"> 
-        
-        
-        <h2>Tell us about your skills!</h2>
-        
-        <p>We will use this to recommend the best business ideas for you.</p>
-        
-        <h3 style="text-align: left; color: #1e293b; margin-top: 20px;">Select your practical skills:</h3>
-        
+  <div class="auth-container" style="max-width: 600px; text-align: center;"> 
+        <h2>✨ Tell us about your skills!</h2>
+        <p style="color: #64748b; margin-bottom: 30px;">Select what you are good at, and we will recommend the perfect micro-business ideas for you.</p>
         
         <form id="profiling-form">
-            
-            <div class="skills-list">
-                <div class="checkbox-group">
-                    <input type="checkbox" id="skill-tailoring" value="Tailoring & Sewing">
-                    <label for="skill-tailoring">Tailoring & Sewing</label>
-                </div>
+            <!-- New Animated Grid Layout -->
+            <div class="skills-grid">
                 
-                <div class="checkbox-group">
-                    <input type="checkbox" id="skill-handicrafts" value="Handicrafts & Arts">
-                    <label for="skill-handicrafts">Handicrafts & Arts</label>
-                </div>
-                
-                <div class="checkbox-group">
-                    <input type="checkbox" id="skill-food" value="Food Preparation & Baking">
-                    <label for="skill-food"> Food Preparation & Baking</label>
-                </div>
-                
-                <div class="checkbox-group">
-                    <input type="checkbox" id="skill-digital" value="Basic Digital Skills">
-                    <label for="skill-digital">Basic Digital Skills</label>
-                </div>
+              <!-- 4 Skill Cards -->
+              <div class="skill-card" data-skill="Tailoring & Sewing">
+                  <h3>🧵 Tailoring & Sewing</h3>
+              </div>
+
+              <div class="skill-card" data-skill="Handicrafts & Arts">
+                  <h3>🎨 Handicrafts & Arts</h3>
+              </div>
+
+              <div class="skill-card" data-skill="Food Preparation & Baking">
+                  <h3>🧁 Baking & Food</h3>
+              </div>
+
+              <div class="skill-card" data-skill="Basic Digital Skills">
+                  <h3>💻 Digital Skills</h3>
+              </div>
+
             </div>
 
-            <button type="submit">Find Business Ideas</button>
+            <!-- Added the ID find-ideas-btn here! -->
+            <button type="button" id="find-ideas-btn" class="submit-btn" style="margin-top: 20px; width: 100%; font-size: 1.1rem;">🚀 Find My Business Ideas</button>
             
         </form>
     </div>
 
-
     <script src="global.js" defer></script>
-    <script src="dashboard.js" defer></script>
+    <script src="profiling.js" defer></script> <!-- Changed this to profiling.js! -->
 </body>
 </html>
