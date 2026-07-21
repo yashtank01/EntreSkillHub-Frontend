@@ -65,36 +65,34 @@ async function loadPendingMentorsFromDB() {
 }
 
 // --- 3. LOAD UPLOADED CONTENT FROM DB ---
-async function loadPendingContentFromDB() {
-    const container = document.getElementById('pending-content-container');
-    container.innerHTML = '<p>Loading pending content from DB...</p>';
-    
+// --- 2. LOAD PENDING MENTORS FROM DB ---
+async function loadPendingMentorsFromDB() {
+    const container = document.getElementById('pending-mentors-container');
+    container.innerHTML = '<p>Loading from database...</p>';
+
     try {
-        const res = await fetch('https://entireskillhub-backend.onrender.com/api/pending-content');
-        const contentList = await res.json();
-        
+        const res = await fetch('https://entireskillhub-backend.onrender.com/api/pending-mentors');
+        const mentors = await res.json();
+
         container.innerHTML = '';
-        if(!contentList || contentList.length === 0) {
-            container.innerHTML = '<p style="color: #64748b; margin-top: 15px; font-weight: bold;">✨ All caught up! No content waiting for approval.</p>';
+        if(!mentors || mentors.length === 0) {
+            container.innerHTML = '<p style="color: #64748b; margin-top: 15px; font-weight: bold;">✨ No pending mentor verifications.</p>';
             return;
         }
 
-        contentList.forEach((item) => {
+        mentors.forEach((mentor) => {
+            // Sirf Naam aur Button dikhega
             container.innerHTML += `
-                <div class="request-card" id="content-req-${item._id}">
-                    <span style="font-size: 0.8rem; background: #e0e7ff; color: #4338ca; padding: 3px 8px; border-radius: 4px; font-weight: bold;">${item.type || 'Resource'}</span>
-                    <h4 style="margin-top: 5px;">${item.title}</h4>
-                    <p><strong>Category:</strong> ${item.category}</p>
-                    <p style="word-break: break-all; font-size: 0.8em; color: #3b82f6;">🔗 ${item.url}</p>
+                <div class="request-card" id="mentor-req-${mentor._id}">
+                    <h4 style="margin-bottom: 15px; font-size: 1.1rem;">${mentor.name}</h4>
                     <div class="btn-group">
-                        <button class="btn btn-accept" onclick="approveContentDB('${item._id}')">Publish to Site</button>
-                        <button class="btn btn-decline" onclick="deleteContentDB('${item._id}')">Delete</button>
+                        <button class="btn btn-accept" onclick="approveMentorDB('${mentor._id}', '${mentor.name}')">Verify & Approve</button>
                     </div>
                 </div>
             `;
         });
     } catch (error) {
-        container.innerHTML = '<p style="color: #64748b; margin-top: 15px; font-weight: bold;">✨ All caught up! No content waiting for approval in DB.</p>';
+        container.innerHTML = '<p style="color: #64748b; margin-top: 15px; font-weight: bold;">✨ No pending mentor verifications in DB.</p>';
     }
 }
 
