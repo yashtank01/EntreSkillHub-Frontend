@@ -7,21 +7,29 @@ document.addEventListener("DOMContentLoaded", () => {
     fetch('https://entireskillhub-backend.onrender.com/').catch(()=>console.log("Backend waking up..."));
 
     // --- 1. UPLOAD CONTENT TO DATABASE ---
-    const uploadForm = document.getElementById('upload-content-form');
+    const originalUploadForm = document.getElementById('upload-content-form');
     
-    if (uploadForm) {
+    if (originalUploadForm) {
+        // FIX: Form ko clone karke wapas lagaya taaki purane double events delete ho jayein!
+        const uploadForm = originalUploadForm.cloneNode(true);
+        originalUploadForm.parentNode.replaceChild(uploadForm, originalUploadForm);
+
         uploadForm.addEventListener('submit', async (e) => {
             e.preventDefault(); 
             
-            const submitBtn = uploadForm.querySelector('.submit-btn');
+            const submitBtn = uploadForm.querySelector('button[type="submit"]') || uploadForm.querySelector('.submit-btn');
             const originalText = submitBtn.innerText;
-            submitBtn.innerText = "Uploading to Database...";
+            submitBtn.innerText = "⏳ Uploading...";
             submitBtn.disabled = true;
 
             const title = document.getElementById('content-title').value;
             const category = document.getElementById('content-category').value;
-            const url = document.getElementById('content-body').value;
             const type = document.getElementById('content-type').value; 
+            
+            // Fallback just in case URL field ka ID alag ho
+            const urlInput = document.getElementById('content-body') || document.getElementById('content-link');
+            const url = urlInput ? urlInput.value : "";
+            
             const mentorEmail = localStorage.getItem("userEmail") || "mentor@demo.com";
 
             try {
@@ -41,10 +49,12 @@ document.addEventListener("DOMContentLoaded", () => {
                 if (response.ok) {
                     if (typeof showNotification === "function") {
                         showNotification("✅ Content uploaded successfully! Waiting for Admin approval.", true);
+                    } else {
+                        alert("✅ Content uploaded successfully! Waiting for Admin approval.");
                     }
                     uploadForm.reset(); 
                 } else {
-                    if (typeof showNotification === "function") showNotification("❌ Failed to upload content.", false);
+                    if (typeof showNotification === "function") showNotification("❌ Failed to upload content. Please check all fields.", false);
                 }
             } catch (error) {
                 console.error('Error uploading to DB:', error);
