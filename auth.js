@@ -25,29 +25,29 @@ function togglePassword(inputId, iconElement) {
     }
 }
 
-// // --- FORGOT PASSWORD LOGIC ---
-// async function handleForgotPassword() {
-//     const email = prompt("Enter your registered email address to receive a password reset link:");
-//     if (!email) return;
+// --- FORGOT PASSWORD LOGIC ---
+async function handleForgotPassword() {
+    const email = prompt("Enter your registered email address to receive a password reset link:");
+    if (!email) return;
 
-//     try {
-//         const response = await fetch('https://entireskillhub-backend.onrender.com/api/forgot-password', {
-//             method: 'POST',
-//             headers: { 'Content-Type': 'application/json' },
-//             body: JSON.stringify({ email: email }) 
-//         });
+    try {
+        const response = await fetch('https://entireskillhub-backend.onrender.com/api/forgot-password', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email: email }) 
+        });
         
-//         const data = await response.json();
+        const data = await response.json();
         
-//         if (response.ok) {
-//             showNotification('✉️ ' + data.message, true);
-//         } else {
-//             showNotification('❌ ' + data.error, false);
-//         }
-//     } catch (error) {
-//         showNotification('❌ Could not connect to the server.', false);
-//     }
-// }
+        if (response.ok) {
+            showNotification('✉️ ' + data.message, true);
+        } else {
+            showNotification('❌ ' + data.error, false);
+        }
+    } catch (error) {
+        showNotification('❌ Could not connect to the server.', false);
+    }
+}
 
 document.addEventListener("DOMContentLoaded", () => {
     

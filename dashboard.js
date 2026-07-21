@@ -6,12 +6,23 @@ document.addEventListener("DOMContentLoaded", () => {
     // --- 🚀 WAKE UP RENDER BACKEND ---
     fetch('https://entireskillhub-backend.onrender.com/').catch(()=>console.log("Backend waking up..."));
 
-    // --- DASHBOARD USER NAME LOGIC ---
+    // --- DASHBOARD USER NAME & EMAIL LOGIC ---
     const urlParams = new URLSearchParams(window.location.search);
-    const userName = urlParams.get('name') || localStorage.getItem('userName');
-    if (userName) {
+    const urlName = urlParams.get('name');
+    const urlEmail = urlParams.get('email'); // Catch the email from backend!
+
+    // If new login, save details to LocalStorage
+    if (urlName) localStorage.setItem('userName', urlName);
+    if (urlEmail) localStorage.setItem('userEmail', urlEmail); // Save new email
+
+    // Display welcome message
+    const savedName = localStorage.getItem('userName');
+    if (savedName) {
         const welcomeHeading = document.getElementById('welcome-message');
-        if (welcomeHeading) welcomeHeading.innerText = `Welcome back, ${userName}! 👋`;
+        if (welcomeHeading) welcomeHeading.innerText = `Welcome back, ${savedName}! 👋`;
+        
+        // Clean up URL so it looks professional
+        window.history.replaceState({}, document.title, window.location.pathname);
     }
 
     loadBusinessIdeas();
