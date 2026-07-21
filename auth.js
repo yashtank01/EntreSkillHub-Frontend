@@ -2,6 +2,9 @@
 // 2. auth.js (Authentication & Form Toggles)
 // ==========================================
 
+// --- 🚀 WAKE UP RENDER BACKEND ---
+fetch('https://entireskillhub-backend.onrender.com/').catch(()=>console.log("Backend waking up..."));
+
 function toggleForms() {
     const loginSec = document.getElementById('login-section');
     const regSec = document.getElementById('register-section');
@@ -22,30 +25,6 @@ function togglePassword(inputId, iconElement) {
     } else if (passwordInput) {
         passwordInput.type = 'password';
         iconElement.innerHTML = closedEyeSVG;
-    }
-}
-
-// --- FORGOT PASSWORD LOGIC ---
-async function handleForgotPassword() {
-    const email = prompt("Enter your registered email address to receive a password reset link:");
-    if (!email) return;
-
-    try {
-        const response = await fetch('https://entireskillhub-backend.onrender.com/api/forgot-password', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ email: email }) 
-        });
-        
-        const data = await response.json();
-        
-        if (response.ok) {
-            showNotification('✉️ ' + data.message, true);
-        } else {
-            showNotification('❌ ' + data.error, false);
-        }
-    } catch (error) {
-        showNotification('❌ Could not connect to the server.', false);
     }
 }
 
@@ -85,14 +64,19 @@ document.addEventListener("DOMContentLoaded", () => {
                     localStorage.setItem("userRole", role);
 
                     if (typeof showNotification === 'function') {
-                        showNotification('✅ Account created! Redirecting to setup...', true);
+                        showNotification('✅ ' + data.message, true);
                     } else {
-                        alert("✅ Account created! Let's set up your profile.");
+                        alert("✅ " + data.message);
                     }
 
-                    setTimeout(() => {
-                        window.location.href = `profiling.html?name=${encodeURIComponent(name)}`;
-                    }, 1500); 
+                    // Sirf students ko profiling pe bhejna hai, mentors wahi ruko
+                    if (role === 'student') {
+                        setTimeout(() => {
+                            window.location.href = `profiling.html?name=${encodeURIComponent(name)}&email=${encodeURIComponent(email)}`;
+                        }, 1500); 
+                    } else {
+                        submitBtn.innerText = "✅ Application Sent!";
+                    }
 
                 } else {
                     showNotification('❌ Registration failed: ' + data.error, false);
@@ -138,27 +122,25 @@ document.addEventListener("DOMContentLoaded", () => {
                 
                 if (response.ok) {
                     localStorage.setItem('userRole', data.role);
+                    localStorage.setItem('userEmail', email);
+                    localStorage.setItem('userName', data.name);
                     
-                    if (data.role === 'mentor' && data.isMentorApproved !== true) {
-                        showNotification('Login successful! Your Mentor application is pending for Admin approval. Redirecting...', true);
-                        setTimeout(() => {
-                            window.location.href = `dashboard.html?name=${encodeURIComponent(data.name)}`;
-                        }, 3500);
-                    } else {
-                        showNotification('✅ ' + data.message, true);
-                        submitBtn.innerText = "✅ Success!"; 
-                        
-                        setTimeout(() => {
-                            if (data.role === 'mentor') {
-                                window.location.href = `mentor-dashboard.html?name=${encodeURIComponent(data.name)}`;
-                            } else if (data.role === 'admin') {
-                                window.location.href = `admin-dashboard.html?name=${encodeURIComponent(data.name)}`;
-                            } else {
-                                window.location.href = `dashboard.html?name=${encodeURIComponent(data.name)}`;
-                            }
-                        }, 1500);
-                    }
+                    showNotification('✅ ' + data.message, true);
+                    submitBtn.innerText = "✅ Success!"; 
+                    
+                    // URL mein Name aur Email bhej rahe hain taaki Dashboard sahi data fetch kare
+                    setTimeout(() => {
+                        if (data.role === 'mentor') {
+                            window.location.href = `mentor-dashboard.html?name=${encodeURIComponent(data.name)}&email=${encodeURIComponent(email)}`;
+                        } else if (data.role === 'admin') {
+                            window.location.href = `admin-dashboard.html?name=${encodeURIComponent(data.name)}&email=${encodeURIComponent(email)}`;
+                        } else {
+                            window.location.href = `dashboard.html?name=${encodeURIComponent(data.name)}&email=${encodeURIComponent(email)}`;
+                        }
+                    }, 1500);
+                    
                 } else {
+                    // Ye error backend se aayega (jaise: "Your profile is under review!")
                     showNotification(`❌ ${data.error}`, false);
                     submitBtn.innerText = originalBtnText;
                     submitBtn.disabled = false;
