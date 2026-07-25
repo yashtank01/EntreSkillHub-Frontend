@@ -445,3 +445,22 @@ body.dark-mode .request-card h4 { color: #f8fafc !important; }
         font-size: 2.5rem !important;
     }
 }
+
+/* --- FINAL MOBILE FIX FOR CLIPPED TITLE --- */
+@media screen and (max-width: 768px) {
+    /* Pushes the title down so the navbar doesn't hide it */
+    .landing-page .hero {
+        padding-top: 220px !important; 
+    }
+    
+    /* Adjusts font size so it fits perfectly on all phones */
+    .landing-page .animated-title { 
+        font-size: 2.6rem !important; 
+        line-height: 1.3 !important; 
+    }
+    
+    /* Prevents the subtitle from getting cut */
+    .landing-page .tagline {
+        word-wrap: break-word; 
+    }
+}
