@@ -1,6 +1,4 @@
-// ==========================================
-// 5. roadmap.js (Dynamic Roadmap Generator)
-// ==========================================
+
 
 document.addEventListener("DOMContentLoaded", () => {
     const roadmapStepsContainer = document.getElementById('roadmap-steps');

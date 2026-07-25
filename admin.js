@@ -1,7 +1,3 @@
-// ==========================================
-// admin.js (REAL DATABASE / BACKEND VERSION)
-// ==========================================
-
 document.addEventListener("DOMContentLoaded", () => {
     // 🚀 WAKE UP RENDER BACKEND
     fetch('https://entireskillhub-backend.onrender.com/').catch(()=>console.log("Backend waking up..."));

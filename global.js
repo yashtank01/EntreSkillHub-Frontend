@@ -1,9 +1,3 @@
-// ==========================================
-// 1. global.js (Loaded on EVERY page)
-// ==========================================
-
-// --- 🌙 DEFAULT DARK MODE LOGIC ---
-// Apply theme immediately to prevent white flashing
 let currentTheme = localStorage.getItem('theme');
 
 // Agar user pehli baar aaya hai (memory khali hai), toh usko "dark" set kar do!
@@ -18,9 +12,9 @@ if (currentTheme === 'dark') {
     document.body.classList.remove('dark-mode');
 }
 
-// ==========================================
+
 // INITIALIZATION ON PAGE LOAD
-// ==========================================
+
 document.addEventListener("DOMContentLoaded", () => {
     
     // --- THEME TOGGLE LOGIC ---
@@ -111,11 +105,9 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 
-// ==========================================
-// GLOBAL FUNCTIONS
-// ==========================================
 
-// --- NOTIFICATION SYSTEM ---
+// GLOBAL FUNCTIONS
+
 function showNotification(message, isSuccess) {
     const toast = document.getElementById('toast-message');
     if (!toast) return; 
@@ -158,7 +150,7 @@ async function loadStudentContent() {
             const card = document.createElement('div');
             card.className = 'content-card';
             
-            // FIX: Using 'url' and 'uploadedBy' based on new schema
+            
             let safeLink = item.url;
             if (item.type === 'video' && !safeLink.startsWith('http')) {
                 safeLink = 'https://' + safeLink; 

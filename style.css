@@ -1,6 +1,5 @@
-/* ========================================== */
 /* 1. GLOBAL BASE & TYPOGRAPHY                */
-/* ========================================== */
+
 * {
     margin: 0;
     padding: 0;
@@ -28,9 +27,9 @@ h2 { margin-top: 0; color: #1e293b; }
 p { color: #64748b; font-size: 0.9em; margin-bottom: 20px; }
 .hidden { display: none; }
 
-/* ========================================== */
+
 /* 2. GLOBAL FORMS, INPUTS & BUTTONS          */
-/* ========================================== */
+
 
 /* Standardized Text Inputs */
 input[type="text"], input[type="email"], input[type="password"], select, .form-input {
@@ -79,9 +78,9 @@ button:hover, .submit-btn:hover, .btn:hover { background-color: #1d4ed8; }
 .toast.success { background-color: #10b981; } 
 .toast.error { background-color: #ef4444; }   
 
-/* ========================================== */
+
 /* 3. AUTHENTICATION PAGE                     */
-/* ========================================== */
+
 .auth-container { 
     background: white; padding: 40px 30px; border-radius: 10px; 
     box-shadow: 0 10px 15px rgba(0,0,0,0.1); width: 100%; max-width: 550px; text-align: center; 
@@ -103,9 +102,9 @@ button:hover, .submit-btn:hover, .btn:hover { background-color: #1d4ed8; }
 .google-btn { background-color: white; color: #333; border: 1px solid #ccc; display: flex; justify-content: center; align-items: center; gap: 10px; }
 .google-btn:hover { background-color: #f8fafc; }
 
-/* ========================================== */
+
 /* 4. DASHBOARD & UNIVERSAL LAYOUTS           */
-/* ========================================== */
+
 .universal-nav, .nav { display: flex; justify-content: space-between; align-items: center; background: transparent; padding: 20px 0; margin-bottom: 20px; border-bottom: 1px solid #e2e8f0; }
 .universal-nav h2, .nav h2 { margin: 0; font-size: 1.5em; }
 .nav-link, .nav a { text-decoration: none; font-weight: bold; margin-right: 15px; color: #2563eb; }
@@ -128,9 +127,9 @@ button:hover, .submit-btn:hover, .btn:hover { background-color: #1d4ed8; }
 .video-container { margin: 15px 0; }
 iframe { width: 100%; height: 200px; border-radius: 6px; border: none; }
 
-/* ========================================== */
+
 /* 5. MENTOR & ADMIN PORTALS                  */
-/* ========================================== */
+
 .mentor-nav { background: #1e293b; padding: 20px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); margin-bottom: 20px; color: white; display: flex; justify-content: space-between; align-items: center;}
 .mentor-nav h2 { margin: 0; color: white; }
 .mentor-nav .links a { margin-left: 20px; text-decoration: none; color: #94a3b8; font-weight: bold; transition: 0.2s; }
@@ -163,9 +162,9 @@ body.admin-page { background-color: #f1f5f9; }
 .admin-list-item { display: flex; justify-content: space-between; align-items: center; padding: 15px 0; border-bottom: 1px solid #f1f5f9; }
 .admin-list-item:last-child { border-bottom: none; }
 
-/* ========================================== */
+
 /* 6. PROGRESS, ROADMAP, & CONTENT UPLOAD     */
-/* ========================================== */
+
 .progress-container { display: flex; flex-wrap: wrap; gap: 30px; max-width: 1000px; margin: 40px auto; padding: 0 20px; }
 .progress-column { flex: 1; min-width: 300px; background: white; padding: 20px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
 .progress-column h3 { border-bottom: 2px solid #2563eb; padding-bottom: 10px; color: #1e293b; }
@@ -187,9 +186,9 @@ body.admin-page { background-color: #f1f5f9; }
 .progress-fill { background: #2563eb; height: 10px; border-radius: 8px; width: 45%; }
 .progress-text { text-align: right; font-weight: bold; margin-bottom: 15px; color: #334155; }
 
-/* ========================================== */
-/* 7. STUDENT CONTENT & SKILL CARDS (FIXED!)  */
-/* ========================================== */
+
+/* 7. STUDENT CONTENT & SKILL CARDS   */
+
 .skills-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; margin-bottom: 25px; }
 
 /* The Base Skill Card Style */
@@ -211,7 +210,6 @@ body.admin-page { background-color: #f1f5f9; }
     box-shadow: 0 10px 15px rgba(0,0,0,0.1); 
 }
 
-/* The Selected (Blue) Effect - Controlled by JavaScript */
 .skill-card.selected { 
     border: 2px solid #3b82f6 !important; 
     background-color: rgba(59, 130, 246, 0.1) !important; 
@@ -228,9 +226,9 @@ body.admin-page { background-color: #f1f5f9; }
     color: #2563eb;
 }
 
-/* ========================================== */
+
 /* 8. GLOBAL THEME MANAGER (DARK MODE)        */
-/* ========================================== */
+
 .floating-toggle-container { position: absolute; top: 20px; right: 20px; }
 .nav-toggle-btn { margin: 0; padding: 5px; }
 .theme-icon-btn { background: transparent; border: none; cursor: pointer; color: #1e293b; display: flex; align-items: center; justify-content: center; padding: 8px; border-radius: 50%; width: auto; margin: 0; }
@@ -295,9 +293,9 @@ body.dark-mode .request-card p strong {
 body.dark-mode .stat-card h3 { color: #94a3b8 !important; }
 body.dark-mode .stat-card .number { color: #f8fafc !important; }
 body.dark-mode .request-card h4 { color: #f8fafc !important; }
-/* ========================================== */
+
 /* 9. LANDING PAGE (SINGLE SCREEN)            */
-/* ========================================== */
+
 .landing-page { margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #0f172a; color: #f8fafc; overflow-x: hidden; }
 .landing-page .navbar {
     display: flex; justify-content: space-between; align-items: center; padding: 1.2rem 5%; background: rgba(15, 23, 42, 0.9);
@@ -346,14 +344,6 @@ body.dark-mode .request-card h4 { color: #f8fafc !important; }
 @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
 @keyframes blinkCursor { to { border-color: transparent; } }
 
-@media (max-width: 768px) {
-    .landing-page h1 { font-size: 3rem; line-height: 1.2; margin-bottom: 10px; }
-    .landing-page .tagline { font-size: 1.1rem; padding: 0 15px; min-height: 100px; }
-    .landing-page .feature-grid { gap: 1.5rem; padding: 0 10px; }
-    .landing-page .feature-card { padding: 1.5rem; }
-    .landing-page .btn { width: 100%; max-width: 280px; }
-}
-
 /* Fix for Auth Form Alignment */
 .auth-container form, 
 .auth-box form {
@@ -374,4 +364,84 @@ body.dark-mode .request-card h4 { color: #f8fafc !important; }
 .auth-box input {
     width: 100%;
     box-sizing: border-box;
+}
+
+
+/* 10. MOBILE RESPONSIVENESS (SMARTPHONES)    */
+
+@media screen and (max-width: 768px) {
+    /* 1. Landing Page Fixes */
+    .landing-page .animated-title { 
+        font-size: 3.2rem !important; /* Huge title resized */
+        line-height: 1.2; 
+        margin-bottom: 15px; 
+        word-wrap: break-word;
+        padding: 0 10px;
+    }
+    
+    .landing-page .tagline { 
+        font-size: 1rem; 
+        padding: 0 15px; 
+        min-height: 80px; 
+    }
+    
+    .landing-page .navbar {
+        flex-direction: column; /* Stack logo and buttons vertically */
+        gap: 15px;
+        padding: 15px 5%;
+    }
+    
+    .landing-page .nav-btn {
+        margin: 5px;
+        display: inline-block;
+    }
+
+    .landing-page .feature-grid { gap: 1.5rem; padding: 0 10px; }
+    .landing-page .feature-card { padding: 1.5rem; }
+    .landing-page .btn { width: 100%; max-width: 280px; }
+
+    /* 2. Dashboard Navbars Fix (Overlapping Links) */
+    .universal-nav, .nav, .mentor-nav, .admin-nav {
+        flex-direction: column; /* Move links below the logo */
+        text-align: center;
+        gap: 15px;
+    }
+
+    .nav-right-controls, .mentor-nav .links, .admin-nav .links {
+        display: flex;
+        flex-wrap: wrap; /* Prevents text overlapping, pushes to next line */
+        justify-content: center;
+        gap: 10px;
+    }
+    
+    .nav-link, .nav a, .mentor-nav .links a, .admin-nav .links a {
+        margin: 0 5px; /* Adjust margin so they sit nicely next to each other */
+        font-size: 0.95rem;
+    }
+
+    /* 3. Layout Grid Adjustments */
+    .skills-grid {
+        grid-template-columns: 1fr; /* 1 column instead of 2 for skills */
+    }
+    
+    .mentor-container, .admin-panels, .progress-container {
+        flex-direction: column; /* Stack panels vertically */
+    }
+    
+    .half-width {
+        width: 100%; /* Forms full width on mobile */
+    }
+
+    /* 4. Fix Auth Container sizing */
+    .auth-container {
+        padding: 30px 15px;
+        width: 90%;
+    }
+}
+
+/* Extra small screens (like older iPhones) */
+@media screen and (max-width: 400px) {
+    .landing-page .animated-title {
+        font-size: 2.5rem !important;
+    }
 }

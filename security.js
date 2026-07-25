@@ -1,4 +1,3 @@
-// --- ADMIN SECURITY BOUNCER ---
 const urlParams = new URLSearchParams(window.location.search);
 const urlRole = urlParams.get('role');
 

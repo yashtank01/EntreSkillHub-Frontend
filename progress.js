@@ -1,6 +1,4 @@
-// ==========================================
-// 6. progress.js (REAL BACKEND DATABASE FETCH)
-// ==========================================
+
 
 document.addEventListener("DOMContentLoaded", () => {
     const ideasContainer = document.getElementById('saved-ideas-container');

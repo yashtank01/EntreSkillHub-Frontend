@@ -1,8 +1,3 @@
-// ==========================================
-// 2. auth.js (Authentication & Form Toggles)
-// ==========================================
-
-// --- 🚀 WAKE UP RENDER BACKEND ---
 fetch('https://entireskillhub-backend.onrender.com/').catch(()=>console.log("Backend waking up..."));
 
 function toggleForms() {
@@ -69,7 +64,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         alert("✅ " + data.message);
                     }
 
-                    // Sirf students ko profiling pe bhejna hai, mentors wahi ruko
+                  
                     if (role === 'student') {
                         setTimeout(() => {
                             window.location.href = `profiling.html?name=${encodeURIComponent(name)}&email=${encodeURIComponent(email)}`;
@@ -140,7 +135,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     }, 1500);
                     
                 } else {
-                    // Ye error backend se aayega (jaise: "Your profile is under review!")
+                    
                     showNotification(`❌ ${data.error}`, false);
                     submitBtn.innerText = originalBtnText;
                     submitBtn.disabled = false;

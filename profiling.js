@@ -1,6 +1,4 @@
-// ==========================================
-// profiling.js (Skill Selection Logic)
-// ==========================================
+
 
 document.addEventListener("DOMContentLoaded", () => {
     const skillCards = document.querySelectorAll('.skill-card');

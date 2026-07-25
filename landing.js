@@ -1,8 +1,4 @@
 document.addEventListener('DOMContentLoaded', () => {
-    
-    // ==========================================
-    // 1. TYPEWRITER EFFECT FOR TAGLINE
-    // ==========================================
     const taglineElement = document.querySelector('.tagline');
     // This is the text that will be typed out!
     const textToType = "Turn your practical skills into a thriving micro-business with structured roadmaps and expert mentorship.";
@@ -27,9 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
     setTimeout(typeWriter, 500);
 
 
-    // ==========================================
-    // 2. SCROLL ANIMATION FOR STACKED CARDS
-    // ==========================================
+
     const featureCards = document.querySelectorAll('.feature-card');
 
     const observer = new IntersectionObserver((entries) => {

@@ -1,7 +1,3 @@
-// ==========================================
-// 3. dashboard.js (FINAL WITH FULL RESOURCES & DB)
-// ==========================================
-
 document.addEventListener("DOMContentLoaded", () => {
     // --- 🚀 WAKE UP RENDER BACKEND ---
     fetch('https://entireskillhub-backend.onrender.com/').catch(()=>console.log("Backend waking up..."));
@@ -30,9 +26,9 @@ document.addEventListener("DOMContentLoaded", () => {
     loadMentors();
 });
 
-// ==========================================
-// --- 1. LOAD & FILTER BUSINESS IDEAS ---
-// ==========================================
+
+//LOAD & FILTER BUSINESS IDEAS
+
 function loadBusinessIdeas() {
     const ideasFeed = document.getElementById('business-ideas-feed');
     if (!ideasFeed) return; 
@@ -60,7 +56,7 @@ function loadBusinessIdeas() {
 
         // --- Handicrafts & Arts ---
         { title: "Handmade Crafts & Etsy Shop", skill: "Handicrafts & Arts", desc: "Sell your custom crafts and artwork locally or on online marketplaces.", videoUrl: "https://www.youtube.com/embed/nj9wn7YhQPA" },
-        { title: "Resin Art & Jewelry Making", skill: "Handicrafts & Arts", desc: "Create trending custom jewelry, coasters, and keychains from home.", videoUrl: "https://www.youtube.com/embed/q6Qn8eN_yU4" },
+        { title: "Resin Art & Jewelry Making", skill: "Handicrafts & Arts", desc: "Create trending custom jewelry, coasters, and keychains from home.", videoUrl: "https://www.youtube.com/embed/ImoZjQNYyZI" },
         { title: "Custom Portraits & Illustrations", skill: "Handicrafts & Arts", desc: "Offer commissioned artwork or digital portraits for clients.", videoUrl: "https://www.youtube.com/embed/4TJSf8jXCvE" },
         { title: "Eco-friendly Packaging & Bags", skill: "Handicrafts & Arts", desc: "Produce sustainable, handmade packaging and paper bags for local shops.", videoUrl: "https://www.youtube.com/embed/72MDe6eUIIs" }
     ];
@@ -85,9 +81,9 @@ function loadBusinessIdeas() {
     });
 }
 
-// ==========================================
-// --- 2. BOOKMARK & REDIRECT LOGIC ---
-// ==========================================
+
+//BOOKMARK & REDIRECT LOGIC ---
+
 window.bookmarkAndRedirect = async function(buttonElement, ideaTitle) {
     const userEmail = localStorage.getItem("userEmail") || "testuser@demo.com";
     
@@ -118,46 +114,52 @@ window.bookmarkAndRedirect = async function(buttonElement, ideaTitle) {
     }
 };
 
-// ==========================================
-// --- 3. LOAD LEARNING RESOURCES (Articles & Checklists) ---
-// ==========================================
+//  LOAD LEARNING RESOURCES (Articles & Checklists)
+
 function loadLearningResources() {
-    const resourcesFeed = document.getElementById('learning-resources-feed');
-    if (!resourcesFeed) return;
+    const container = document.getElementById('learning-resources-feed') || document.querySelector('.learning-resources-list');
+    if(!container) return;
 
     const savedSkills = JSON.parse(localStorage.getItem("userSkills") || "[]");
 
-    // NEW: Exactly 1 Article and 1 Checklist per skill!
-    const allResources = [
-        // Universal
-        { title: "Ultimate Business Launch Checklist", type: "Checklist", skill: "Universal", desc: "Don't miss a single step before launching your micro-business.", link: "https://www.score.org/resource/template/business-plan-checklist" },
-        { title: "5 Free Marketing Strategies on Instagram", type: "Article", skill: "Universal", desc: "Learn how to use Reels and Stories to get local clients.", link: "https://business.instagram.com/blog/5-free-ways-to-grow-your-business-on-instagram" },
 
-        // Food Preparation
-        { title: "How to Get Your FSSAI License Online", type: "Article", skill: "Food Preparation & Baking", desc: "A complete step-by-step guide to registering your food business in India.", link: "https://www.fssai.gov.in/" },
-        { title: "Cloud Kitchen Hygiene & Safety Checklist", type: "Checklist", skill: "Food Preparation & Baking", desc: "Ensure your home kitchen meets commercial safety standards.", link: "https://www.posist.com/restaurant-times/cloud-kitchen/cloud-kitchen-safety-checklist.html" },
+const allResources = [
+    // 🍳 FOOD PREPARATION & BAKING
+    { skill: "Food Preparation & Baking", type: "Article", title: "How to Get Your FSSAI License", desc: "Step-by-step guide to registering your food business in India.", url: "https://indiafilings.com" },
+    { skill: "Food Preparation & Baking", type: "Article", title: "Pricing Strategy for Homemade Food", desc: "Learn how to calculate costs and set profitable prices for meals.", url: "https://toasttab.com" },
+    { skill: "Food Preparation & Baking", type: "Checklist", title: "Commercial Kitchen Hygiene Checklist", desc: "Ensure your home kitchen meets commercial safety standards.", url: "https://webstaurantstore.com" },
+    { skill: "Food Preparation & Baking", type: "Checklist", title: "Baking Equipment Startup Checklist", desc: "Essential tools you need before taking your first big cake order.", url: "https://webstaurantstore.com" },
 
-        // Tailoring & Sewing
-        { title: "Where to Source Wholesale Fabric in India", type: "Article", skill: "Tailoring & Sewing", desc: "A guide to the best textile markets for sourcing cheap, high-quality fabric.", link: "https://textilelearner.net/wholesale-fabric-markets-in-india/" },
-        { title: "Boutique Setup & Equipment Checklist", type: "Checklist", skill: "Tailoring & Sewing", desc: "Everything you need from sewing machines to threads before opening.", link: "https://sewing.com/sewing-room-checklist/" },
+    // 🧵 TAILORING & SEWING
+    { skill: "Tailoring & Sewing", type: "Article", title: "How to Start a Clothing Boutique", desc: "A complete guide to opening a successful tailoring or clothing shop.", url: "https://forbes.com" },
+    { skill: "Tailoring & Sewing", type: "Article", title: "Marketing Guide for Small Businesses", desc: "Get more local clients using effective digital marketing strategies.", url: "https://hubspot.com" },
+    { skill: "Tailoring & Sewing", type: "Checklist", title: "Boutique Inventory Management", desc: "Must-have fabrics, threads, and tools to always keep in stock.", url: "https://www.shopify.com" },
+    { skill: "Tailoring & Sewing", type: "Checklist", title: "Garment Quality Control Checklist", desc: "Ensure every stitched piece is perfect before delivering to customers.", url: "https://www.intouch-quality.com" },
 
-        // Basic Digital Skills
-        { title: "How to Get Your First Client on Upwork", type: "Article", skill: "Basic Digital Skills", desc: "Proven proposal templates and strategies to win your first freelance gig.", link: "https://www.upwork.com/resources/how-to-get-first-job-on-upwork" },
-        { title: "Freelancer Profile Setup Checklist", type: "Checklist", skill: "Basic Digital Skills", desc: "A 10-step checklist to make your Upwork or Fiverr profile stand out.", link: "https://www.fiverr.com/resources/guides/freelance-career/how-to-create-a-fiverr-profile" },
+    // 💻 BASIC DIGITAL SKILLS
+    { skill: "Basic Digital Skills", type: "Article", title: "Optimizing Your Upwork Profile", desc: "Stand out to international clients with a professional freelance profile.", url: "https://upwork.com" },
+    { skill: "Basic Digital Skills", type: "Article", title: "Instagram Marketing for Freelancers", desc: "Use Reels and portfolio posts to attract high-paying clients.", url: "https://hubspot.com" },
+    { skill: "Basic Digital Skills", type: "Checklist", title: "Client Onboarding Checklist", desc: "Step-by-step checklist to welcome and onboard new clients smoothly.", url: "https://hubspot.com" },
+    { skill: "Basic Digital Skills", type: "Checklist", title: "Social Media Audit Checklist", desc: "Evaluate and improve your client's social media presence.", url: "https://hootsuite.com" },
 
-        // Handicrafts & Arts
-        { title: "How to Price Your Handmade Art", type: "Article", skill: "Handicrafts & Arts", desc: "Stop undercharging! Learn the formula for pricing your materials and labor.", link: "https://www.etsy.com/seller-handbook/article/how-to-price-like-a-pro/227462276973" },
-        { title: "Etsy Shop Setup & SEO Checklist", type: "Checklist", skill: "Handicrafts & Arts", desc: "Optimize your product listings and tags to rank higher on Etsy search.", link: "https://www.etsy.com/seller-handbook/article/the-ultimate-guide-to-etsy-search/366469415790" }
-    ];
+    // 🎨 HANDICRAFTS & ARTS
+    { skill: "Handicrafts & Arts", type: "Article", title: "How to Sell Crafts on Etsy", desc: "The ultimate guide to setting up your first international craft store.", url: "https://etsy.com" },
+    { skill: "Handicrafts & Arts", type: "Article", title: "Packaging Tips for Fragile Arts", desc: "Learn how to pack resin, glass, and clay items safely for shipping.", url: "https://fedex.com" },
+    { skill: "Handicrafts & Arts", type: "Checklist", title: "10 Steps to Start Your Business", desc: "Don't miss a single step before publishing your first craft listing.", url: "https://sba.gov" },
+    { skill: "Handicrafts & Arts", type: "Checklist", title: "Craft Fair & Exhibition Checklist", desc: "Everything you need to pack for selling at local physical markets.", url: "https://www.shopify.com" }
+];
+    let matchingResources = savedSkills.length > 0 ? allResources.filter(res => savedSkills.includes(res.skill)) : allResources;
+    container.innerHTML = ''; 
 
-    let matchingResources = allResources.filter(resource => resource.skill === "Universal" || savedSkills.includes(resource.skill));
-    if (savedSkills.length === 0) matchingResources = allResources;
-
-    resourcesFeed.innerHTML = ''; 
-
-    matchingResources.forEach(resource => {
-        let icon = resource.type === "Checklist" ? "✅" : "📄";
-        let color = resource.type === "Checklist" ? "#10b981" : "#3b82f6"; 
+    matchingResources.forEach(res => {
+        let icon = res.type === "Checklist" ? "✅" : "📄";
+        let color = res.type === "Checklist" ? "#10b981" : "#3b82f6"; 
+        
+        let tagColor = "#e2e8f0"; 
+        if(res.skill === "Food Preparation & Baking") tagColor = "rgb(249, 133, 0)"; 
+        if(res.skill === "Tailoring & Sewing") tagColor = "rgb(249, 133, 0)"; 
+        if(res.skill === "Basic Digital Skills") tagColor ="rgb(249, 133, 0)"; 
+        if(res.skill === "Handicrafts & Arts") tagColor = "rgb(249, 133, 0)"; 
 
         const card = document.createElement('div');
         card.className = 'idea-card';
@@ -165,20 +167,20 @@ function loadLearningResources() {
 
         card.innerHTML = `
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
-                <span style="font-size: 0.8rem; background: #334155; padding: 4px 8px; border-radius: 4px; color: white; font-weight: bold;">${resource.skill === 'Universal' ? 'General' : 'Niche'}</span>
-                <span style="font-size: 0.85rem; font-weight: bold; color: ${color};">${icon} ${resource.type}</span>
+                <span style="font-size: 0.75rem; background: ${tagColor}; padding: 4px 8px; border-radius: 6px; color: #0f172a; font-weight: bold; text-transform: uppercase;">${res.skill}</span>
+                <span style="font-size: 0.85rem; font-weight: bold; color: ${color};">${icon} ${res.type}</span>
             </div>
-            <h4 style="margin: 0 0 5px 0; font-size: 1.1rem;">${resource.title}</h4>
-            <p style="color: #64748b; font-size: 0.9rem; margin-bottom: 15px;">${resource.desc}</p>
-            <a href="${resource.link}" target="_blank" style="margin-top: auto; color: ${color}; text-decoration: none; font-size: 0.9rem; font-weight: bold;">Open ${resource.type} ➔</a>
+            <h4 style="margin: 0 0 5px 0; font-size: 1.1rem;">${res.title}</h4>
+            <p style="color: #64748b; font-size: 0.9rem; margin-bottom: 15px;">${res.desc}</p>
+            <a href="${res.url}" target="_blank" style="margin-top: auto; display: inline-block; background: ${color}; color: white; padding: 8px 12px; border-radius: 4px; font-weight: bold; text-decoration: none; font-size: 0.85rem; transition: 0.2s; text-align: center;">View ${res.type} ➔</a>
         `;
-        resourcesFeed.appendChild(card);
+        container.appendChild(card);
     });
 }
 
-// ==========================================
-// --- 4. LOAD MENTORS ---
-// ==========================================
+
+// LOAD MENTORS 
+
 function loadMentors() {
     const mentorsFeed = document.getElementById('mentors-feed');
     if (!mentorsFeed) return;
@@ -218,9 +220,8 @@ function loadMentors() {
     });
 }
 
-// ==========================================
-// --- 5. REQUEST MENTOR LOGIC (REAL DATABASE) ---
-// ==========================================
+
+//REQUEST MENTOR LOGIC (REAL DATABASE) 
 window.requestMentorDB = async function(buttonElement, mentorName) {
     const userEmail = localStorage.getItem("userEmail") || "testuser@demo.com";
     
